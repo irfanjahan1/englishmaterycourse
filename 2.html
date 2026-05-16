@@ -1684,8 +1684,6 @@ function speak(text, lang='en-US', rate=0.9) {
 
 document.querySelectorAll('.yr').forEach(el => el.textContent = new Date().getFullYear());
 
-showPage('day1');
-
 /* ─── ROUTING ─────────────────────────────────────── */
 const PAGES = ['landing','course','day1','vocab','sentences','practice','convo','test','challenge','assess'];
 const DASH_PAGES = ['day1','vocab','sentences','practice','convo','test','assess','challenge'];
@@ -1768,6 +1766,8 @@ function gotoPage(id) {
 }
 function goHome() { showPage('landing'); }
 function showCourse() { showPage('course'); buildCourse(); showWeek(1); }
+
+showPage('day1');
 
 /* ─── PAGE NAV STRIP ──────────────────────────────── */
 // Ordered list of inner pages that show the nav strip
