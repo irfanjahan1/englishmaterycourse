@@ -1,0 +1,3505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>English Mastery Course by Irfan Jahan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,700&family=Nunito:wght@400;500;600;700;800;900&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<style>
+/* ═══════════════════════════════════════════════════
+   DESIGN SYSTEM — UNIFIED TOKEN SET
+═══════════════════════════════════════════════════ */
+:root {
+  --green-900: #061710;
+  --green-800: #0a2e1a;
+  --green-700: #134d2c;
+  --green-600: #1a6b3c;
+  --green-500: #22883f;
+  --green-400: #28a870;
+  --green-300: #3dbd5a;
+  --green-200: #74c69d;
+  --green-100: #b7e4c7;
+  --green-50:  #e6f9ec;
+  --gold:      #f4d03f;
+  --gold-mid:  #c8a84b;
+  --gold-dark: #d4ac0d;
+  --white:     #f9fef9;
+  --off-white: #f7faf8;
+  --text-dark: #0d1f13;
+  --text-mid:  #2d5a3d;
+  --text-muted:#5a8a6a;
+  --shadow-lg: 0 20px 80px rgba(10,46,26,0.28);
+  --shadow-md: 0 8px 40px rgba(0,0,0,0.30);
+  --radius-xl: 28px;
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --radius-pill: 999px;
+  --dash-h:    48px;
+  --transition: 0.22s cubic-bezier(.4,0,.2,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+/* ── Montserrat: all headings & buttons ── */
+h1, h2, h3, h4, h5, h6,
+button, .ud-btn, .cta-btn, .reg-submit, .reg-photo-btn,
+.v-start-btn, .s-start-btn, .p-start-btn, .start-chat-btn,
+.t-start-btn, .t-show-btn, .t-nav-btn, .nav-btn-card,
+.btn-next-sec, .p-action-btn, .s-btn, .c-action-btn,
+.chunk-btn, .wa-highlight, .retake-btn, .a-opt-btn,
+.week-pill, .pn-btn, .sb-btn, .crop-btn, .photo-source-btn,
+#ud-logout-btn, #startBtn {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: #6BBF6B;
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════════
+   UNIVERSAL DASHBOARD  (shown on inner pages)
+═══════════════════════════════════════════════════ */
+#universal-dash {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--dash-h);
+  background: linear-gradient(90deg, var(--green-900) 0%, var(--green-800) 60%, var(--green-700) 100%);
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  z-index: 1000;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.45);
+  flex-wrap: nowrap;
+}
+#universal-dash.visible { display: flex; }
+
+#ud-left { display: flex; align-items: center; gap: 10px; flex-shrink: 0; min-width: 0; }
+
+#ud-home {
+  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px;
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: var(--white);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+#ud-home:hover { background: rgba(255,255,255,0.22); transform: scale(1.08); }
+#ud-home svg { width: 17px; height: 17px; }
+
+#ud-title {
+  font-family: 'Cinzel', serif;
+  font-size: 13px; font-weight: 700;
+  color: rgba(255,255,255,0.92);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 260px;
+  letter-spacing: .3px;
+}
+
+/* User info in dashboard */
+#ud-user-info {
+  display:flex;align-items:center;gap:8px;flex-shrink:0;
+  margin-left:auto;
+  height:36px;
+}
+#ud-user-avatar-wrap {
+  width:36px;height:36px;border-radius:50%;overflow:hidden;
+  border:2px solid rgba(40,168,112,0.5);
+  background:rgba(255,255,255,0.08);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+#ud-user-avatar { width:100%;height:100%;object-fit:cover;display:none; }
+#ud-avatar-placeholder { font-size:1rem;opacity:0.5;line-height:1; }
+#ud-user-name {
+  font-size:0.78rem;font-weight:800;
+  color:rgba(255,255,255,0.85);
+  white-space:nowrap;max-width:120px;
+  overflow:hidden;text-overflow:ellipsis;
+  line-height:1;
+}
+
+#ud-spacer { flex: 1; }
+
+#ud-nav { display: flex; gap: 5px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
+
+.ud-btn {
+  font-family: 'Nunito', sans-serif;
+  font-size: 10px; font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+.ud-btn:hover, .ud-btn.active {
+  background: var(--green-400);
+  border-color: var(--green-300);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* ═══════════════════════════════════════════════════
+   SHARED UTILITIES
+═══════════════════════════════════════════════════ */
+.page { display: none !important; width: 100%; min-height: 100vh; }
+.page.active { display: block !important; }
+/* Restore flex layout for pages that use it */
+#page-landing.active,
+#page-vocab.active,
+#page-sentences.active,
+#page-convo.active,
+#page-test.active { display: flex !important; }
+
+.with-dash { padding-top: var(--dash-h); }
+
+/* Space for fixed bottom nav strip on all inner pages */
+#page-day1, #page-vocab, #page-sentences, #page-practice,
+#page-convo, #page-test, #page-assess, #page-challenge {
+  padding-bottom: 72px;
+}
+
+/* ═══════════════════════════════════════════════════
+   PAGE 0 — LANDING
+═══════════════════════════════════════════════════ */
+#page-landing {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: #6BBF6B;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+#page-landing::before {
+  content:'';
+  position:absolute; inset:0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+  pointer-events:none;
+}
+
+.landing-badge {
+  display: inline-block;
+  background: rgba(244,208,63,0.12);
+  border: 1px solid rgba(244,208,63,0.35);
+  color: var(--gold);
+  font-size: 0.72rem; font-weight: 800;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 6px 16px; border-radius: var(--radius-pill);
+  margin-bottom: 1.5rem;
+}
+
+.landing-title-wrap {
+  margin-bottom: 1.6rem;
+  text-align: center;
+}
+.landing-title-main {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.7rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--green-900);
+  letter-spacing: -0.5px;
+  line-height: 1.12;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  margin-bottom: 0.55rem;
+}
+.landing-title-by {
+  font-family: 'Cinzel', serif;
+  font-style: normal;
+  font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+  color: var(--green-700);
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.landing-sub {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: rgba(255,255,255,0.72);
+  max-width: 480px; margin: 0 auto 2.5rem;
+  line-height: 1.7;
+}
+
+.landing-features {
+  display: flex; flex-wrap: wrap; gap: 1rem;
+  justify-content: center; margin-bottom: 2.5rem;
+}
+.feat-chip {
+  background: rgba(40,168,112,0.15);
+  border: 1px solid rgba(40,168,112,0.3);
+  color: var(--green-100);
+  font-size: 0.8rem; font-weight: 700;
+  padding: 7px 15px; border-radius: var(--radius-pill);
+}
+
+#startBtn {
+  padding: 1.1rem 3.5rem;
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem; font-weight: 800;
+  color: var(--green-900);
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  border: none; border-radius: var(--radius-pill);
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(244,208,63,0.38);
+  transition: var(--transition);
+  letter-spacing: .5px;
+}
+#startBtn:hover { transform: scale(1.06); box-shadow: 0 12px 40px rgba(244,208,63,0.5); }
+
+.landing-wa {
+  margin-top: 2rem;
+  font-size: 0.8rem; color: rgba(255,255,255,0.4);
+}
+.landing-wa a { color: #25d366; text-decoration: none; font-weight: 700; }
+
+/* ── View Details button on landing ── */
+.view-details-btn {
+  background: rgba(255,255,255,0.55);
+  border: 1.5px solid rgba(255,255,255,0.85);
+  color: #083318;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 7px 20px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  margin-bottom: 14px;
+  letter-spacing: .3px;
+  transition: var(--transition);
+}
+.view-details-btn:hover {
+  background: rgba(255,255,255,0.85);
+  transform: translateY(-1px);
+}
+
+/* ── Course Details Popup ── */
+#course-details-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99998;
+  background: rgba(6,23,16,0.72);
+  backdrop-filter: blur(4px);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+#course-details-modal.open { display: flex; }
+.cdm-box {
+  background: #fff;
+  border-radius: var(--radius-xl);
+  max-width: 520px;
+  width: 100%;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.45);
+  position: relative;
+  animation: cdmIn 0.28s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes cdmIn {
+  from { opacity:0; transform: translateY(18px) scale(0.97); }
+  to   { opacity:1; transform: translateY(0) scale(1); }
+}
+/* Fixed top bar — never scrolls */
+.cdm-top-bar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid rgba(40,168,112,0.12);
+  background: #fff;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+.cdm-close {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--green-800);
+  border: 2.5px solid var(--green-600);
+  color: #fff;
+  font-size: 1.1rem; font-weight: 900;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.18s, transform 0.18s;
+  flex-shrink: 0;
+}
+.cdm-close:hover { background: var(--green-600); transform: scale(1.1); }
+/* Scrollable content area */
+.cdm-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  padding: 22px 36px 20px;
+}
+.cdm-scroll::-webkit-scrollbar { display: none; }
+/* Fixed bottom bar with arrow button — never scrolls */
+.cdm-bottom-bar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px 14px;
+  background: #fff;
+  border-top: 1px solid rgba(40,168,112,0.12);
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+}
+.cdm-arrow-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--green-700);
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.18s, transform 0.18s;
+}
+.cdm-arrow-btn:hover { background: var(--green-500); transform: scale(1.1); }
+.cdm-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.25rem; font-weight: 800;
+  color: var(--green-800);
+  text-align: center; margin-bottom: 18px; letter-spacing: .4px;
+}
+.cdm-body {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.92rem; color: #1a3a25; line-height: 1.75;
+}
+.cdm-body p { margin-bottom: 12px; }
+.cdm-sub-heading { font-weight: 900; color: var(--green-700); margin-bottom: 8px !important; }
+.cdm-body ul { list-style: none; padding: 0; margin: 0 0 18px; }
+.cdm-body ul li {
+  padding: 7px 0 7px 28px; position: relative;
+  border-bottom: 1px solid rgba(40,168,112,0.1); font-weight: 700;
+}
+.cdm-body ul li:last-child { border-bottom: none; }
+.cdm-body ul li::before { content:'✓'; position:absolute; left:0; color:var(--green-500); font-weight:900; }
+.cdm-divider {
+  border: none;
+  border-top: 1.5px solid rgba(40,168,112,0.22);
+  margin: 18px 0 12px;
+}
+.cdm-copyright {
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: .3px;
+  padding-bottom: 4px;
+}
+
+/* Welcome to + contact info on landing */
+.landing-welcome-to {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  font-weight: 600;
+  color: var(--green-700);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.landing-contact-info {
+  margin-top: 1.8rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #083318;
+  line-height: 2;
+}
+.landing-contact-line {
+  display: flex; align-items: center; justify-content: center; gap: 4px;
+  font-weight: 600;
+}
+.landing-contact-link {
+  color: #145c35; text-decoration: none; font-weight: 700;
+}
+.landing-contact-link:hover { text-decoration: underline; }
+.landing-copy-btn {
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.65rem;
+  padding: 1px 5px;
+  line-height: 1.4;
+  height: 1.4em;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+  vertical-align: middle;
+}
+.landing-copy-btn:hover { background: rgba(255,255,255,0.85); }
+
+/* ═══════════════════════════════════════════════════
+   PAGE 1 — COURSE INDEX (60-day grid)
+═══════════════════════════════════════════════════ */
+#page-course {
+  background: #6BBF6B;
+}
+
+.course-inner { max-width: 940px; margin: 0 auto; padding: 1.5rem; }
+
+.course-welcome {
+  text-align: center;
+  padding: 1.2rem 0 0.6rem;
+}
+.course-welcome-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1rem, 3.5vw, 1.5rem);
+  font-weight: 800;
+  color: var(--green-900);
+  letter-spacing: .5px;
+  margin-bottom: 1.1rem;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+.course-progress-wrap {
+  max-width: 100%;
+  margin: 0 auto 1.5rem;
+}
+.course-progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 7px;
+}
+.course-progress-label {
+  font-size: 0.75rem; font-weight: 800;
+  color: var(--green-100);
+  letter-spacing: .3px;
+}
+.course-progress-count {
+  font-size: 0.75rem; font-weight: 800;
+  color: var(--gold-mid);
+}
+.course-progress-track {
+  width: 100%; height: 10px;
+  background: rgba(255,255,255,0.08);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.course-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22883f 0%, #28a870 40%, #f4d03f 80%, #f59e0b 100%);
+  border-radius: var(--radius-pill);
+  transition: width 0.6s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 0 10px rgba(244,208,63,0.3);
+}
+
+.weeks-nav {
+  display: flex; flex-wrap: nowrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+  justify-content: space-between;
+}
+.weeks-nav::-webkit-scrollbar { display: none; }
+.week-pill {
+  padding: 0.38rem 0.9rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(40,168,112,0.35);
+  background: transparent;
+  color: var(--green-100);
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.72rem; font-weight: 800;
+  cursor: pointer; transition: var(--transition);
+  flex: 1;
+  text-align: center;
+}
+.week-pill:hover, .week-pill.active { background: var(--green-400); border-color: var(--green-300); color: #fff; }
+
+.week-label {
+  grid-column: 1/-1;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; color: var(--gold);
+  margin: 1rem 0 0.5rem;
+  border-left: 4px solid var(--green-400);
+  padding-left: 10px;
+  display: none;
+}
+.week-label.visible { display: block; }
+
+.days-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.day-card, .weekly-review {
+  background: rgba(20,90,50,0.42);
+  border: 1px solid rgba(40,168,112,0.2);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+  display: none;
+  min-height: 64px;
+}
+.day-card.visible, .weekly-review.visible { display: block; }
+.day-card:hover { border-color: var(--gold-mid); background: rgba(30,132,73,0.28); transform: translateY(-2px); }
+.weekly-review:hover { border-color: var(--green-300); background: rgba(40,168,112,0.2); transform: translateY(-2px); }
+
+.day-header {
+  display: flex; align-items: center;
+  gap: 0.8rem; padding: 0.8rem;
+}
+.day-badge, .week-badge {
+  background: var(--green-400);
+  min-width: 42px; height: 42px;
+  border-radius: var(--radius-sm);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  font-size: 0.48rem; font-weight: 800; color: #fff;
+  flex-shrink: 0;
+}
+.week-badge { background: var(--gold-mid); }
+.day-badge strong, .week-badge strong { font-size: 1.05rem; }
+.day-topic, .review-topic {
+  font-size: 0.82rem; font-weight: 700;
+  line-height: 1.25; text-align: left;
+}
+
+.course-footer {
+  text-align: center; padding: 3rem 2rem;
+  background: #061710;
+  border-top: 1px solid rgba(40,168,112,0.12);
+}
+.wa-highlight {
+  display: inline-block;
+  background: #25d366; color: white;
+  padding: 9px 22px; border-radius: var(--radius-pill);
+  font-weight: 800; margin-bottom: 12px;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(37,211,102,0.3);
+  transition: var(--transition);
+}
+.wa-highlight:hover { transform: scale(1.04); }
+
+/* ═══════════════════════════════════════════════════
+   PAGE 2 — DAY 1 INTRO
+═══════════════════════════════════════════════════ */
+#page-day1 {
+  background: #6BBF6B;
+  color: var(--text-dark);
+}
+#page-day1 main {
+  min-height: calc(100vh - var(--dash-h) - 80px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px 20px 36px;
+}
+.intro-card {
+  background: #fff;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  max-width: 680px; width: 100%;
+  padding: 44px 52px 48px;
+  text-align: center;
+  position: relative; overflow: hidden;
+  animation: cardIn 0.7s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes cardIn {
+  from { opacity:0; transform: translateY(28px) scale(0.98); }
+  to   { opacity:1; transform: translateY(0) scale(1); }
+}
+.intro-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:5px;
+  background: linear-gradient(90deg, var(--green-400), var(--green-200), var(--green-400));
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+.intro-card h1 {
+  font-size: 28px; font-weight: 900;
+  color: var(--text-dark); line-height: 1.3;
+  margin-bottom: 8px; letter-spacing: -0.02em;
+}
+.intro-card h1 span { color: var(--green-500); }
+.intro-divider {
+  width: 60px; height: 4px;
+  background: linear-gradient(90deg, var(--green-300), var(--green-200));
+  border-radius: 99px; margin: 14px auto 26px;
+}
+.intro-body {
+  font-size: 16px; line-height: 1.8;
+  color: var(--text-mid); font-weight: 500;
+  margin-bottom: 30px; text-align: left;
+}
+.intro-body ul { list-style: none; padding-left: 0; }
+.intro-body li {
+  margin-bottom: 12px; padding-left: 26px; position: relative;
+}
+.intro-body li::before {
+  content:'✓'; position:absolute; left:0;
+  color: var(--green-500); font-weight: 900;
+}
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: linear-gradient(135deg, var(--green-500) 0%, var(--green-400) 100%);
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px; font-weight: 800;
+  padding: 16px 40px; border-radius: var(--radius-pill);
+  text-decoration: none; border: none; cursor: pointer;
+  box-shadow: 0 6px 28px rgba(34,136,63,0.38);
+  transition: var(--transition);
+  letter-spacing: .3px;
+}
+.cta-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(34,136,63,0.48); }
+.cta-btn svg { width: 18px; height: 18px; }
+.intro-footer {
+  text-align: center; padding: 18px 0 28px;
+  font-size: 13px; color: var(--text-muted); font-weight: 600;
+}
+.intro-footer a { color: var(--green-600); text-decoration: none; font-weight: 800; display: block; margin-bottom: 6px; font-size: 15px; }
+
+/* ═══════════════════════════════════════════════════
+   PAGE 3 — VOCABULARY (Flashcards)
+═══════════════════════════════════════════════════ */
+#page-vocab {
+  background: #6BBF6B;
+  padding-top: var(--dash-h);
+  padding-bottom: 44px;
+  display: flex; flex-direction: column; align-items: center;
+  position: relative; overflow-x: hidden;
+}
+#page-vocab::before {
+  content:''; position:absolute; inset:0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 28px 28px; pointer-events:none; z-index:0;
+}
+
+.v-header { width:100%; max-width:660px; text-align:center; z-index:1; margin-bottom:20px; padding-top:20px; }
+.v-header h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.35rem; color: var(--green-900); letter-spacing: .5px; font-weight: 800;
+}
+
+.v-card {
+  width:100%; max-width:660px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: var(--radius-xl);
+  padding: 30px 28px 28px;
+  box-shadow: var(--shadow-md);
+  z-index:1;
+  display: flex; flex-direction: column; align-items: center;
+}
+
+.progress-wrap { width:100%; margin-bottom:20px; }
+.progress-label { display:flex; justify-content:space-between; font-size:0.75rem; color:var(--green-100); margin-bottom:8px; font-weight:800; }
+.progress-bar  { width:100%; height:6px; background:rgba(255,255,255,0.1); border-radius:10px; overflow:hidden; }
+.progress-fill { height:100%; background:linear-gradient(90deg,var(--green-300),var(--gold)); transition:width .4s ease; }
+
+.flashcard-scene { width:100%; perspective:1100px; margin-bottom:22px; }
+.flashcard {
+  width:100%; min-height:230px;
+  border-radius: var(--radius-lg);
+  transform-style: preserve-3d;
+  transition: transform .55s ease;
+  cursor: pointer; position: relative;
+}
+.flashcard.flipped { transform: rotateY(180deg); }
+.card-face {
+  position:absolute; inset:0;
+  border-radius: var(--radius-lg);
+  backface-visibility: hidden;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 28px 24px; text-align: center;
+}
+.card-front { border:1.5px solid rgba(255,255,255,0.16); }
+.card-front::before {
+  content:''; position:absolute; inset:0;
+  background: var(--card-gradient, linear-gradient(135deg,#134e2a,#166534));
+  border-radius: inherit; z-index:0;
+}
+.card-front > * { position:relative; z-index:1; }
+.card-back {
+  background: linear-gradient(135deg,#0b3f23 0%,#155f36 100%);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  transform: rotateY(180deg);
+}
+.card-word {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 5vw, 2.4rem); font-weight: 700; color:#fff;
+}
+.card-urdu {
+  margin-top:10px;
+  font-family: 'Noto Nastaliq Urdu', serif;
+  font-size: clamp(1.1rem, 4vw, 1.55rem);
+  color: var(--green-100); direction: rtl; line-height:2.1;
+}
+.flip-hint { font-size:0.68rem; color:rgba(255,255,255,0.45); margin-top:8px; font-weight:600; }
+
+.nav-row { display:flex; gap:12px; width:100%; margin-bottom:20px; }
+.nav-btn-card {
+  flex:1; padding:13px;
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.07);
+  color:#fff; border:1.5px solid rgba(255,255,255,0.16);
+  cursor:pointer; font-weight:800; font-family:'Nunito',sans-serif;
+  transition: var(--transition);
+}
+.nav-btn-card:hover:not(:disabled) { background:rgba(40,168,112,0.3); }
+.nav-btn-card:disabled { opacity:0.3; cursor:not-allowed; }
+
+.bottom-actions { display:flex; gap:12px; width:100%; max-width:660px; margin-top:20px; flex-wrap:wrap; }
+.btn-next-sec {
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  padding: 13px 22px; border-radius: var(--radius-pill);
+  font-weight:800; text-decoration:none; transition:var(--transition);
+  cursor:pointer; border:none; font-size:0.9rem; flex:1; min-width:150px;
+  font-family:'Nunito',sans-serif;
+}
+.btn-gold { background:linear-gradient(135deg,var(--gold),#f59e0b); color:var(--green-900); box-shadow:0 5px 20px rgba(244,208,63,0.3); }
+.btn-glass { background:rgba(255,255,255,0.09); border:1.5px solid rgba(255,255,255,0.28); color:#fff; }
+.btn-next-sec:hover { transform:translateY(-3px); }
+
+.page-footer { margin-top:28px; text-align:center; color:rgba(183,228,199,0.3); font-size:0.75rem; z-index:1; }
+
+/* ── Vocab Start Overlay ── */
+.v-start-overlay {
+  position: absolute; inset: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(6,23,16,0.72);
+  backdrop-filter: blur(6px);
+  border-radius: var(--radius-lg);
+}
+.v-start-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem; font-weight: 700;
+  color: var(--green-900);
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  border: none; border-radius: var(--radius-pill);
+  padding: 13px 38px;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(244,208,63,0.4);
+  transition: var(--transition);
+  letter-spacing: 1px;
+}
+.v-start-btn:hover { transform: scale(1.07); box-shadow: 0 12px 40px rgba(244,208,63,0.55); }
+
+/* ═══════════════════════════════════════════════════
+   PAGE 4 — SENTENCES / PHRASES
+═══════════════════════════════════════════════════ */
+#page-sentences {
+  background: #6BBF6B;
+  padding-top: var(--dash-h);
+  display: flex; flex-direction: column; align-items: center;
+}
+
+.s-main { width:100%; max-width:860px; padding:20px 16px 44px; display:flex; flex-direction:column; align-items:center; gap:20px; }
+.s-title { font-family:'Cinzel', serif; font-size:1.5rem; color:var(--green-900); text-align:center; font-weight:800; letter-spacing:.5px; }
+
+.s-card {
+  width:100%;
+  background: linear-gradient(160deg, #176044 0%, #0f4832 50%, #0a3427 100%);
+  border: 1px solid rgba(40,168,112,0.22);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  padding: 30px 25px;
+  display:flex; flex-direction:column; align-items:center; gap:18px;
+}
+
+.counter-bar {
+  display:flex; align-items:center; justify-content:space-between; width:100%;
+}
+.counter-text { font-size:0.75rem; color:var(--green-100); font-weight:700; }
+.progress-track { flex:1; height:4px; background:rgba(255,255,255,0.08); border-radius:4px; margin:0 12px; overflow:hidden; }
+.cat-tag {
+  font-size:0.68rem; text-transform:uppercase; letter-spacing:.1em;
+  color:var(--gold-mid); background:rgba(200,168,75,0.1);
+  padding:2px 10px; border-radius:10px; border:1px solid rgba(200,168,75,0.2);
+}
+
+.s-flashcard {
+  width:100%; min-height:160px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:12px; text-align:center; transition:opacity .25s ease;
+}
+.s-flashcard.animating { opacity:0; }
+.phrase-en { font-family:'Playfair Display',serif; font-size:1.8rem; color:var(--gold); line-height:1.2; font-weight:700; }
+.phrase-ur { font-family:'Noto Nastaliq Urdu',serif; direction:rtl; font-size:1.35rem; line-height:2.2; color:#fff; }
+.phrase-ps { font-family:'Noto Nastaliq Urdu',serif; direction:rtl; font-size:1.2rem; line-height:2.2; color:var(--gold); margin-top:4px; }
+
+.s-nav-btns { display:flex; gap:10px; width:100%; justify-content:center; flex-wrap:wrap; }
+.s-btn {
+  font-family:'Nunito',sans-serif; font-size:0.8rem; font-weight:700;
+  border:none; border-radius:var(--radius-pill); padding:10px 20px; cursor:pointer; transition:var(--transition);
+}
+.s-btn-outline { background:transparent; border:1.2px solid rgba(40,168,112,0.4); color:var(--green-50); }
+.s-btn-primary { background:var(--green-400); color:#fff; }
+.s-btn-speak { background:var(--gold-mid); color:var(--green-900); }
+.s-btn:hover { transform:translateY(-2px); }
+
+.s-links { display:flex; gap:12px; width:100%; justify-content:center; }
+.s-link-btn {
+  flex:1; max-width:180px;
+  text-decoration:none; text-align:center;
+  padding:12px; border-radius:var(--radius-md);
+  font-weight:700; font-size:0.85rem; transition:var(--transition);
+  cursor:pointer;
+}
+.sl-vocab { background:rgba(200,168,75,0.1); border:1px solid var(--gold-mid); color:var(--gold); }
+.sl-prac  { background:rgba(40,168,112,0.1); border:1px solid var(--green-400); color:var(--green-100); }
+.s-link-btn:hover { transform:translateY(-2px); }
+
+/* ── Sentences Start Overlay ── */
+.s-start-overlay {
+  position: absolute; inset: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(8,31,22,0.82);
+  backdrop-filter: blur(6px);
+  border-radius: var(--radius-xl);
+}
+.s-start-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem; font-weight: 700;
+  color: var(--green-900);
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  border: none; border-radius: var(--radius-pill);
+  padding: 13px 36px;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(244,208,63,0.4);
+  transition: var(--transition);
+  letter-spacing: 1px;
+}
+.s-start-btn:hover { transform: scale(1.07); box-shadow: 0 12px 40px rgba(244,208,63,0.55); }
+
+/* ═══════════════════════════════════════════════════
+   PAGE 5 — SHADOWING PRACTICE (Teleprompter)
+═══════════════════════════════════════════════════ */
+#page-practice {
+  background: #6BBF6B;
+  color: var(--text-dark);
+  padding-top: var(--dash-h);
+  padding-bottom: 56px;
+}
+
+.p-section-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem; font-weight: 800;
+  color: var(--green-900);
+  text-align: center;
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
+}
+.p-play-btn {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green-500), var(--green-400));
+  border: none;
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(34,136,63,0.4);
+  transition: transform 0.15s, box-shadow 0.15s;
+  flex-shrink: 0;
+}
+.p-play-btn:hover { transform: scale(1.1); box-shadow: 0 6px 22px rgba(34,136,63,0.55); }
+.p-play-btn.playing { background: linear-gradient(135deg, #c0392b, #e74c3c); box-shadow: 0 4px 16px rgba(192,57,43,0.4); }
+
+.p-wrap { max-width: 820px; margin: 0 auto; padding: 20px 14px 0; }
+.p-card {
+  background: #fff;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 6px 30px rgba(26,71,49,0.14);
+  padding: 22px 18px;
+  border: 1.5px solid rgba(64,145,108,0.12);
+}
+
+.teleprompter {
+  background: #1a4731;
+  border-radius: var(--radius-lg);
+  height: 280px;
+  position: relative; overflow: hidden;
+  margin-bottom: 20px;
+  border: 3px solid #40916c;
+}
+.tp-highlight {
+  position:absolute; left:10px; right:10px; top:50%; transform:translateY(-50%);
+  height:64px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: var(--radius-md);
+  pointer-events:none; z-index:2;
+}
+.tp-track {
+  position:absolute; inset:0;
+  overflow-y: scroll; scrollbar-width:none; z-index:4;
+}
+.tp-track::-webkit-scrollbar { display:none; }
+
+.tp-row {
+  height:64px; display:flex; align-items:center;
+  justify-content:center; padding:0 15px;
+  opacity:0.3; transition:0.3s; text-align:center;
+  cursor: pointer;
+}
+.tp-row.active { opacity:1; }
+.tp-text { font-size:0.84rem; font-weight:700; color:#fff; line-height:1.2; display:block; width:100%; }
+.tp-row.active .tp-text { font-size:1.05rem; font-weight:900; text-shadow:0 2px 4px rgba(0,0,0,0.3); }
+
+.tp-urdu {
+  font-family:'Noto Nastaliq Urdu',serif; font-weight:700; font-size:0.92rem;
+  color:var(--text-dark); text-align:center; direction:rtl; line-height:1.6;
+  min-height:44px; margin-bottom:8px; padding:0 10px;
+}
+.chunk-nav { display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:18px; }
+.chunk-btn {
+  background:var(--green-100); border:none; padding:10px 18px;
+  border-radius:10px; font-weight:800; color:var(--text-dark); cursor:pointer; font-size:0.9rem;
+}
+.chunk-btn:disabled { opacity:0.4; }
+
+.p-start-overlay {
+  position:absolute; inset:0; background:rgba(26,71,49,0.95);
+  display:flex; align-items:center; justify-content:center; z-index:10;
+}
+.p-start-btn {
+  background:#fff; color:#1a4731;
+  padding:12px 24px; border-radius:30px;
+  border:none; font-weight:900; cursor:pointer; font-size:0.9rem;
+}
+
+.p-action-row { display:flex; flex-direction:column; gap:10px; }
+.p-action-btn {
+  background:var(--green-400); color:#fff; padding:14px;
+  border-radius:var(--radius-md); text-decoration:none;
+  font-weight:800; text-align:center; font-size:0.95rem; cursor:pointer;
+  transition:var(--transition);
+}
+.p-action-btn:hover { background:var(--green-500); }
+.p-action-btn.alt { background:#2d6a4f; }
+
+/* ═══════════════════════════════════════════════════
+   PAGE 6 — CONVERSATION (Chat Phone UI)
+═══════════════════════════════════════════════════ */
+#page-convo {
+  background: #6BBF6B;
+  padding-top: var(--dash-h);
+  display: flex; flex-direction: column; align-items: center;
+  overflow-x: hidden;
+}
+
+.c-main { width:100%; max-width:600px; padding:0 12px 40px; display:flex; flex-direction:column; align-items:center; margin-top:20px; }
+
+.c-topic { font-family:'Cinzel', serif; font-size:1.6rem; color:var(--green-900); margin-bottom:14px; letter-spacing:.05em; font-weight:800; }
+
+.c-progress-wrap { width:100%; height:8px; background:rgba(255,255,255,0.1); border-radius:10px; margin-bottom:24px; overflow:hidden; border:1px solid rgba(40,168,112,0.2); }
+.c-progress-fill { height:100%; background:linear-gradient(90deg,var(--gold-mid),var(--gold)); width:0%; transition:width .4s ease; }
+
+.phone-wrapper { position:relative; width:100%; display:flex; justify-content:center; align-items:center; margin-bottom:28px; }
+.mobile-phone {
+  width:100%; max-width:318px; height:580px;
+  background: #081f16;
+  border: 8px solid #2a2a2a;
+  border-radius: 40px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 0 10px rgba(0,0,0,0.5);
+  position:relative; overflow:hidden;
+  display:flex; flex-direction:column; z-index:5;
+}
+.phone-nav-btn {
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:48px; height:48px;
+  background:var(--green-400); border:none; border-radius:50%;
+  color:white; display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:var(--transition);
+  box-shadow:0 6px 15px rgba(0,0,0,0.4); z-index:10;
+}
+.phone-nav-btn:disabled { opacity:0; pointer-events:none; }
+.phone-nav-btn:hover { background:var(--green-300); transform:translateY(-50%) scale(1.1); }
+#c-prevBtn { left:-10px; }
+#c-nextBtn { right:-10px; }
+@media(min-width:500px){ #c-prevBtn{left:40px;} #c-nextBtn{right:40px;} }
+
+.phone-notch { position:absolute; top:0; left:50%; transform:translateX(-50%); width:150px; height:24px; background:#2a2a2a; border-bottom-left-radius:20px; border-bottom-right-radius:20px; z-index:10; }
+.status-bar { height:44px; padding:0 24px; display:flex; justify-content:space-between; align-items:center; font-size:0.72rem; font-weight:700; color:#fff; z-index:5; margin-top:5px; }
+.chat-head { padding:10px 18px; border-bottom:1px solid rgba(255,255,255,0.05); display:flex; align-items:center; gap:10px; }
+.ch-avatar { width:34px; height:34px; background:var(--green-700); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.95rem; border:1px solid var(--green-400); }
+.ch-info h4 { font-size:0.82rem; color:#fff; }
+.ch-info p  { font-size:0.62rem; color:var(--green-300); }
+
+.chat-window { flex:1; padding:18px 14px; display:flex; flex-direction:column; gap:18px; background:rgba(255,255,255,0.02); position:relative; overflow:hidden; }
+.start-overlay { position:absolute; top:0; left:0; right:0; bottom:0; display:flex; align-items:center; justify-content:center; z-index:30; background:rgba(0,0,0,0.2); }
+.start-chat-btn { background:var(--gold); color:var(--green-900); padding:12px 28px; border-radius:var(--radius-pill); border:none; font-weight:900; cursor:pointer; }
+
+.msg-row { display:flex; width:100%; }
+.msg-row.left { justify-content:flex-start; }
+.msg-row.right { justify-content:flex-end; }
+.bubble {
+  max-width:86%; padding:11px 15px;
+  border-radius:18px; font-size:0.93rem; line-height:1.4;
+  min-height:56px; display:flex; flex-direction:column; justify-content:center;
+}
+.left .bubble { background:var(--green-700); color:#fff; border-bottom-left-radius:4px; }
+.right .bubble { background:var(--gold); color:#1a0f00; border-bottom-right-radius:4px; direction:ltr; text-align:left; }
+.bubble .ur-sub { margin-top:4px; font-size:0.72rem; opacity:.85; font-family:'Noto Nastaliq Urdu',serif; direction:rtl; text-align:right; font-weight:700; }
+.typing-dots { display:inline-flex; gap:4px; padding:5px 0; }
+.typing-dots span { width:6px; height:6px; background:#fff; border-radius:50%; animation:wave 1.2s infinite ease-in-out; opacity:.6; }
+.right .typing-dots span { background:#1a0f00; }
+.typing-dots span:nth-child(2){animation-delay:.2s;} .typing-dots span:nth-child(3){animation-delay:.4s;}
+@keyframes wave { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px)} }
+.fade-in { animation:fadeInMsg .5s ease forwards; opacity:0; }
+@keyframes fadeInMsg { from{opacity:0;transform:translateY(5px)} to{opacity:1;transform:translateY(0)} }
+
+.chat-input-bar { padding:14px; display:flex; align-items:center; gap:8px; border-top:1px solid rgba(255,255,255,0.05); }
+.fake-input { flex:1; height:36px; background:rgba(255,255,255,0.1); border-radius:18px; padding:0 14px; display:flex; align-items:center; color:rgba(255,255,255,0.4); font-size:0.78rem; }
+.mic-btn { width:36px; height:36px; background:var(--green-400); border-radius:50%; display:flex; align-items:center; justify-content:center; }
+
+.c-wave-anim {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 18px 0 10px;
+}
+.c-wave-anim span {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: chatWave 1.0s infinite ease-in-out;
+  opacity: 0.85;
+}
+.c-wave-anim span:nth-child(1) { animation-delay: 0s; }
+.c-wave-anim span:nth-child(2) { animation-delay: 0.12s; }
+.c-wave-anim span:nth-child(3) { animation-delay: 0.24s; }
+.c-wave-anim span:nth-child(4) { animation-delay: 0.36s; }
+.c-wave-anim span:nth-child(5) { animation-delay: 0.48s; }
+@keyframes chatWave {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.6; }
+  30% { transform: translateY(-10px); opacity: 1; }
+}
+
+
+.c-action-btn { flex:1; text-decoration:none; background:rgba(200,168,75,0.14); border:1.5px solid var(--gold-mid); color:var(--gold); padding:12px; border-radius:var(--radius-pill); font-weight:800; text-align:center; font-size:0.85rem; cursor:pointer; transition:var(--transition); }
+.c-action-btn:hover { background:rgba(200,168,75,0.25); }
+
+/* ═══════════════════════════════════════════════════
+   PAGE 7 — SPEAKING TEST
+═══════════════════════════════════════════════════ */
+#page-test {
+  background: #6BBF6B;
+  padding-top: var(--dash-h);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.t-container { width:96%; max-width:750px; padding-bottom:50px; margin-top:24px; }
+.t-section-label { font-family:'Cinzel', serif; font-size:1.8rem; color:var(--green-900); text-align:center; margin-bottom:10px; font-weight:800; letter-spacing:.5px; }
+.t-instruction { text-align:center; color:var(--green-50); font-size:1rem; margin-bottom:14px; font-weight:600; }
+.t-progress-wrap { width:100%; height:18px; background:rgba(255,255,255,0.1); border-radius:12px; margin-bottom:24px; overflow:hidden; position:relative; border:1px solid rgba(255,255,255,0.1); }
+.t-progress-fill { height:100%; background:linear-gradient(90deg,#28a870,#c8a84b,#f0d98a); width:0%; transition:width .4s ease; }
+.t-progress-text { position:absolute; width:100%; text-align:center; font-size:0.68rem; line-height:18px; font-weight:800; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,0.5); }
+
+.t-card {
+  background: linear-gradient(165deg,#145c42 0%,#0d3b2e 100%);
+  border:1px solid rgba(40,168,112,0.22);
+  border-radius:var(--radius-xl);
+  box-shadow:var(--shadow-md);
+  padding:26px 30px; text-align:center;
+  min-height:320px; display:flex; flex-direction:column; gap:10px; position:relative;
+}
+.t-start-screen { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; }
+.t-content { display:none; flex-direction:column; gap:10px; flex:1; justify-content:center; align-items:center; }
+.t-congrats { display:none; flex-direction:column; justify-content:center; align-items:center; gap:14px; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:100%; animation:congratsIn .8s ease forwards; }
+@keyframes congratsIn { from{opacity:0;transform:translate(-50%,-60%)} to{opacity:1;transform:translate(-50%,-50%)} }
+.congrats-title { font-family:'Playfair Display',serif; font-size:2.4rem; color:var(--gold); }
+.congrats-sub { font-size:1.15rem; color:#fff; }
+
+.t-question { cursor:pointer; padding:8px; }
+.t-q-text { font-size:1.75rem; font-weight:800; color:#fff; }
+.t-reveal { display:none; flex-direction:column; gap:14px; margin-top:4px; animation:fadeInMsg .4s ease; }
+.t-answer-box { padding:12px; border-bottom:1px solid rgba(200,168,75,0.2); }
+.t-a-text { font-size:1.35rem; font-weight:700; color:var(--gold); }
+
+.t-ctrl { display:flex; justify-content:center; align-items:center; gap:12px; padding-top:14px; margin-top:auto; }
+.t-nav-btn { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; padding:10px 15px; border-radius:var(--radius-md); cursor:pointer; font-weight:700; font-size:0.85rem; flex:1; max-width:100px; font-family:'Nunito',sans-serif; }
+.t-show-btn, .t-start-btn { background:var(--gold); color:#1a0f00; border:none; padding:12px 26px; border-radius:var(--radius-pill); font-weight:900; cursor:pointer; box-shadow:0 4px 15px rgba(0,0,0,0.2); transition:var(--transition); font-family:'Nunito',sans-serif; }
+.t-start-btn { font-size:1.1rem; padding:18px 42px; }
+.t-show-btn { flex:2; max-width:165px; font-size:0.9rem; }
+.t-nav-btn:disabled { opacity:0.3; }
+.t-nav-btn:hover:not(:disabled), .t-show-btn:hover, .t-start-btn:hover { transform:translateY(-1px); }
+
+.t-lesson-group { display:flex; gap:10px; margin-top:20px; }
+.t-lesson-link { text-decoration:none; flex:1; background:var(--green-400); color:#fff; padding:14px; border-radius:var(--radius-lg); font-weight:900; text-align:center; font-size:0.95rem; transition:var(--transition); cursor:pointer; }
+.t-lesson-link:hover { background:var(--green-500); }
+
+/* ═══════════════════════════════════════════════════
+   PAGE 8 — CHALLENGE
+═══════════════════════════════════════════════════ */
+#page-challenge {
+  background: #6BBF6B;
+  color: var(--text-dark);
+}
+#page-challenge main { min-height:calc(100vh - var(--dash-h) - 80px); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px 20px 36px; }
+
+/* ═══════════════════════════════════════════════════
+   PAGE 9 — ASSESSMENT (Quiz)
+═══════════════════════════════════════════════════ */
+#page-assess {
+  background: #6BBF6B;
+  color: var(--text-dark);
+  padding-top: var(--dash-h);
+  padding-bottom: 40px;
+}
+.a-wrap { max-width:700px; margin:0 auto; padding:16px 10px; }
+.a-card { background:#fff; border-radius:var(--radius-lg); box-shadow:0 4px 20px rgba(26,71,49,0.1); padding:16px; border:1px solid rgba(0,0,0,0.05); }
+.a-section-title { background:var(--green-100); color:var(--text-dark); padding:8px; border-radius:8px; margin:24px 0 12px; font-weight:900; text-align:center; font-size:0.84rem; text-transform:uppercase; letter-spacing:1px; }
+.a-q-box { margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid #f0f0f0; }
+.a-q-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+.a-q-text { font-weight:900; font-size:1rem; color:var(--text-dark); }
+.a-opt-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+.a-opt-btn { background:#fff; border:1.5px solid var(--green-100); padding:5px 10px; border-radius:8px; cursor:pointer; font-weight:800; font-size:0.84rem; transition:var(--transition); font-family:'Nunito',sans-serif; }
+.a-opt-btn:hover { background:#f0fdf4; }
+.a-opt-btn.correct { background:#d4edda !important; border-color:#28a745 !important; color:#155724; }
+.a-opt-btn.wrong   { background:#f8d7da !important; border-color:#dc3545 !important; color:#721c24; }
+.a-urdu { font-family:'Noto Nastaliq Urdu',serif; font-size:0.78rem; font-weight:500; line-height:1.6; }
+.a-conv-line { font-size:0.93rem; font-weight:800; color:var(--green-600); margin-bottom:6px; }
+.a-example { background:#fdfdfd; border:1px dashed #ccc; padding:8px; border-radius:8px; margin-bottom:14px; font-size:0.78rem; color:#666; }
+
+.a-result { display:none; text-align:center; padding:30px 10px; }
+.score-circle { width:120px; height:120px; border-radius:50%; background:var(--green-800); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.75rem; font-weight:900; margin:0 auto 14px; border:4px solid var(--green-300); }
+.retake-btn { display:inline-flex; align-items:center; gap:8px; background:var(--green-800); color:#fff; border:none; padding:12px 30px; font-size:1rem; border-radius:25px; cursor:pointer; font-weight:800; box-shadow:0 4px 10px rgba(0,0,0,0.1); margin-top:14px; font-family:'Nunito',sans-serif; transition:var(--transition); }
+.retake-btn:hover { background:var(--green-700); }
+.a-bottom-nav { display:none; flex-direction:row; gap:10px; justify-content:center; margin-top:16px; }
+/* Fill-in-the-blank styles */
+.a-fill-box { margin-bottom:20px; padding:14px; background:#f8fffe; border-radius:12px; border:1.5px solid var(--green-100); }
+.a-fill-title { font-weight:900; font-size:0.88rem; color:var(--green-700); margin-bottom:10px; letter-spacing:.3px; text-transform:uppercase; }
+.a-word-bank { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:12px; padding:10px; background:rgba(40,168,112,0.07); border-radius:8px; border:1px dashed rgba(40,168,112,0.3); }
+.a-bank-word { background:#fff; border:1.5px solid var(--green-300); color:var(--green-800); padding:4px 11px; border-radius:20px; font-weight:800; font-size:0.82rem; cursor:pointer; transition:var(--transition); font-family:'Nunito',sans-serif; }
+.a-bank-word:hover { background:var(--green-50); }
+.a-bank-word.used { opacity:0.35; pointer-events:none; text-decoration:line-through; }
+.a-bank-word.selected { background:var(--green-600); color:#fff; border-color:var(--green-600); }
+.a-para-text { font-size:0.9rem; line-height:2.1; color:var(--text-dark); font-weight:600; }
+.a-blank { display:inline-block; min-width:80px; border-bottom:2.5px solid var(--green-400); margin:0 3px; padding:1px 6px; cursor:pointer; color:var(--green-700); font-weight:800; font-size:0.88rem; text-align:center; border-radius:3px 3px 0 0; transition:background 0.15s; vertical-align:bottom; }
+.a-blank:hover { background:rgba(40,168,112,0.08); }
+.a-blank.filled { background:rgba(40,168,112,0.10); color:var(--green-800); }
+.a-blank.correct-fill { background:#d4edda !important; border-color:#28a745 !important; color:#155724 !important; }
+.a-blank.wrong-fill { background:#f8d7da !important; border-color:#dc3545 !important; color:#721c24 !important; }
+
+/* ═══════════════════════════════════════════════════
+   FOOTER (inner pages)
+═══════════════════════════════════════════════════ */
+.inner-footer { text-align:center; padding:20px; font-size:0.78rem; color:rgba(147,201,174,0.4); }
+.inner-footer.light { color:var(--text-muted); }
+
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════ */
+@media(max-width:768px) {
+  :root { --dash-h: 48px; }
+  #universal-dash { position:fixed; flex-direction:row; align-items:center; padding:0 12px; }
+  #ud-spacer { display:none; }
+  #ud-nav { display:none; }
+  .with-dash { padding-top: var(--dash-h); }
+  .days-grid { grid-template-columns:1fr; }
+  .intro-card { padding:30px 22px; }
+  .intro-card h1 { font-size:22px; }
+  .p-action-row { flex-direction:row; justify-content:center; }
+  .p-action-btn { flex:1; max-width:200px; }
+}
+@media(max-width:480px) {
+  #ud-nav { grid-template-columns:repeat(2,1fr); }
+  .page-nav-strip { left: 0; right: 0; padding: 0 12px; }
+  .pn-label { font-size: 0.6rem; }
+  .pn-btn { width: 38px; height: 38px; font-size: 1rem; }
+}
+@media(min-width:768px) {
+  .p-action-row { flex-direction:row; justify-content:center; }
+  .p-action-btn { flex:1; max-width:200px; }
+}
+/* ═══════════════════════════════════════════════════
+   HAMBURGER SIDEBAR
+═══════════════════════════════════════════════════ */
+#sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1998;
+}
+#sidebar-overlay.open { display: block; }
+
+#sidebar {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: max-content;
+  min-width: 200px;
+  max-width: 260px;
+  background: linear-gradient(180deg, var(--green-900) 0%, var(--green-800) 100%);
+  border-right: 1px solid rgba(40,168,112,0.22);
+  box-shadow: 4px 0 28px rgba(0,0,0,0.5);
+  z-index: 1999;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 20px;
+  transform: translateX(-110%);
+  transition: transform 0.26s cubic-bezier(.4,0,.2,1);
+}
+#sidebar.open { transform: translateX(0); }
+
+#sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 14px 10px;
+  border-bottom: 1px solid rgba(40,168,112,0.18);
+  margin-bottom: 8px;
+  gap: 10px;
+}
+#sidebar-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--gold-mid);
+  letter-spacing: .3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#sidebar-close {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 6px;
+  color: var(--white);
+  width: 26px; height: 26px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+#sidebar-close:hover { background: rgba(255,255,255,0.2); }
+
+.sb-btn {
+  font-family: 'Nunito', sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.88);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 10px 18px;
+  text-align: left;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition), color var(--transition);
+  width: 100%;
+}
+.sb-btn:hover {
+  background: rgba(40,168,112,0.22);
+  color: #fff;
+}
+.sb-btn.active {
+  background: var(--green-600);
+  color: #fff;
+}
+
+#ud-nav { display: none; }
+
+/* ═══════════════════════════════════════════════════
+   DESIGN CONSISTENCY — BG #6BBF6B OVERRIDES
+   Cards → white   |   Text on green → dark
+═══════════════════════════════════════════════════ */
+
+/* Default body text: dark on medium-green background */
+body { color: #0d1f13; }
+
+/* ── LANDING PAGE ── */
+.landing-sub { color: #083318; font-weight: 600; }
+.landing-badge {
+  background: rgba(255,255,255,0.45);
+  border-color: rgba(255,255,255,0.7);
+  color: #083318;
+}
+.feat-chip {
+  background: rgba(255,255,255,0.45);
+  border-color: rgba(255,255,255,0.65);
+  color: #083318;
+  font-weight: 700;
+}
+.landing-wa { color: #083318; }
+.landing-wa a { color: #145c35; }
+.landing-title-main { text-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+
+/* ── COURSE INDEX ── */
+.course-progress-label { color: #083318; }
+.course-progress-count { color: #083318; font-weight: 800; }
+.course-progress-track {
+  background: rgba(0,0,0,0.14);
+  border-color: rgba(0,0,0,0.08);
+}
+.week-pill {
+  background: rgba(255,255,255,0.55);
+  border: 1.5px solid rgba(255,255,255,0.8);
+  color: #083318;
+  font-weight: 700;
+}
+.week-pill:hover, .week-pill.active {
+  background: #0d4a22;
+  border-color: #0d4a22;
+  color: #fff;
+}
+.week-label { color: #0d1f13; border-left-color: #0d4a22; }
+.day-card, .weekly-review {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.09);
+  box-shadow: 0 3px 14px rgba(0,0,0,0.1);
+}
+.day-card:hover {
+  background: #f0fdf4;
+  border-color: #28a870;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.13);
+}
+.weekly-review:hover {
+  background: #fefce8;
+  border-color: #c8a84b;
+}
+.day-topic, .review-topic { color: #0d1f13; }
+.day-badge { background: #1a6b3c; }
+.week-badge { background: #b8930a; }
+
+/* ── VOCAB PAGE ── */
+.v-card {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 6px 30px rgba(0,0,0,0.11);
+}
+.v-header h2 { color: #0d1f13; }
+.progress-label { color: #0d1f13; }
+.progress-bar { background: rgba(0,0,0,0.1); }
+.nav-btn-card {
+  background: #f0fdf4;
+  border: 1.5px solid #b7e4c7;
+  color: #0d1f13;
+}
+.nav-btn-card:hover:not(:disabled) {
+  background: #d4edda;
+  border-color: #28a870;
+}
+.page-footer { color: rgba(8,51,24,0.45); }
+
+/* ── SENTENCES PAGE ── */
+.s-title { color: #0d1f13; }
+
+/* ── PRACTICE PAGE ── */
+.p-section-title { color: #0d1f13; }
+.tp-urdu { color: #0d1f13; }
+.chunk-btn {
+  background: #e8f5e9;
+  border: 1px solid #b7e4c7;
+  color: #0d1f13;
+}
+.chunk-btn:hover:not(:disabled) { background: #c8e6c9; }
+
+/* ── CONVERSATION PAGE ── */
+.c-topic { color: #0d1f13; }
+.c-progress-wrap {
+  background: rgba(0,0,0,0.14);
+  border-color: rgba(0,0,0,0.08);
+}
+.c-action-btn {
+  background: #fff;
+  border: 1.5px solid #c8a84b;
+  color: #0d1f13;
+}
+.c-action-btn:hover { background: #fefce8; }
+
+/* ── SPEAKING TEST PAGE ── */
+.t-section-label { color: #0d1f13; }
+.t-instruction { color: #0d1f13; font-weight: 600; }
+.t-progress-wrap {
+  background: rgba(0,0,0,0.14);
+  border-color: rgba(0,0,0,0.08);
+}
+
+/* ── ASSESSMENT PAGE ── */
+.a-section-title {
+  background: #e8f5e9;
+  color: #0d1f13;
+  border: 1px solid #b7e4c7;
+}
+.a-opt-btn { border-color: #b7e4c7; color: #0d1f13; }
+
+/* ── UNIVERSAL DASHBOARD ── */
+#universal-dash {
+  background: linear-gradient(90deg, #0a2e1a 0%, #134d2c 60%, #1a6b3c 100%);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+}
+
+/* ── PAGE NAV STRIP & BOTTOM BAR ── */
+.page-nav-strip {
+  background: linear-gradient(90deg, #0a2e1a 0%, #134d2c 60%, #1a6b3c 100%);
+}
+
+/* ═══════════════════════════════════════════════════
+   FIXED PAGE NAVIGATION STRIP
+═══════════════════════════════════════════════════ */
+.page-nav-strip {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 64px;
+  background: linear-gradient(90deg, var(--green-900) 0%, var(--green-800) 60%, var(--green-700) 100%);
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.45);
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 999;
+  font-family: 'Nunito', sans-serif;
+}
+.page-nav-strip.visible { display: flex; }
+
+.pn-side {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pn-label {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: rgba(255,255,255,0.72);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.pn-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  color: #fff;
+  font-size: 1.15rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.18s;
+  flex-shrink: 0;
+  font-family: 'Nunito', sans-serif;
+}
+.pn-btn:hover { background: var(--green-400); border-color: var(--green-300); transform: scale(1.1); }
+.pn-btn:disabled { opacity: 0.28; cursor: not-allowed; transform: none; }
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ UNIVERSAL DASHBOARD ═══════════════ -->
+<header id="universal-dash">
+  <div id="ud-left">
+    <button id="ud-home" onclick="toggleSidebar()" title="Menu" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <div id="ud-title">Day 1: [Topic]</div>
+  </div>
+  <div id="ud-user-info">
+    <span id="ud-user-name" style="display:none"></span>
+    <div id="ud-user-avatar-wrap" onclick="toggleAvatarDropdown(event)" title="Profile">
+      <img id="ud-user-avatar" alt="Profile"/>
+      <span id="ud-avatar-placeholder">👤</span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ AVATAR DROPDOWN ═══════════════ -->
+<div id="ud-avatar-dropdown">
+  <div id="ud-dropdown-name">👤 —</div>
+  <button id="ud-logout-btn" onclick="doLogout()">🚪 Log Out</button>
+</div>
+<nav id="page-nav-strip" class="page-nav-strip">
+  <div class="pn-side">
+    <button class="pn-btn" id="pn-prev" onclick="pnNavigate(-1)" title="Previous Page">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <span class="pn-label">Previous Page</span>
+  </div>
+  <div class="pn-side">
+    <span class="pn-label">Next Page</span>
+    <button class="pn-btn" id="pn-next" onclick="pnNavigate(1)" title="Next Page">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════ PAGE 0: LANDING ═══════════════ -->
+<div id="page-landing" class="page active">
+  <div class="landing-title-wrap">
+    <p class="landing-welcome-to">Welcome to</p>
+    <h1 class="landing-title-main">English Mastery Course</h1>
+    <p class="landing-title-by">by Irfan Jahan</p>
+  </div>
+  <p class="landing-sub">A gradual 60-day journey to build native-like English fluency — from basic greetings to confident public speaking.</p>
+  <button class="view-details-btn" onclick="openDetailsPopup()">📋 View Details</button>
+  <button id="startBtn" onclick="landingStart()">🎯 Start Learning English</button>
+  <div class="landing-contact-info">
+    <div class="landing-contact-line">
+      WhatsApp:&nbsp;<a href="https://wa.me/923498768545" class="landing-contact-link">03498768545</a>
+      <button class="landing-copy-btn" onclick="landingCopy('03498768545', this)" title="Copy WhatsApp number">📋</button>
+    </div>
+    <div class="landing-contact-line">
+      Email:&nbsp;<a href="mailto:brief.irfan@gmail.com" class="landing-contact-link">brief.irfan@gmail.com</a>
+      <button class="landing-copy-btn" onclick="landingCopy('brief.irfan@gmail.com', this)" title="Copy email">📋</button>
+    </div>
+    <hr style="border:none;border-top:1px solid rgba(8,51,24,0.3);margin:0.6rem auto;width:85%;">
+    <div class="landing-contact-line">Copyright &copy; Master English Academy</div>
+  </div>
+</div>
+
+<!-- ═══════════════ COURSE DETAILS POPUP ═══════════════ -->
+<div id="course-details-modal">
+  <div class="cdm-box">
+    <!-- Fixed top bar: close button always visible -->
+    <div class="cdm-top-bar">
+      <button class="cdm-close" onclick="closeDetailsPopup()" aria-label="Close">✕</button>
+    </div>
+    <!-- Scrollable content -->
+    <div class="cdm-scroll" id="cdm-scroll">
+      <h2 class="cdm-title">About This Course</h2>
+      <div class="cdm-body">
+        <p>In this course, I will teach you English from the very beginner level to mastery. We will start with the basics and progress step by step.</p>
+        <p>Throughout this course, you will learn through vocabulary flashcards, phrases, sentences with translations, shadowing practice, conversations, speaking tests, assessments, and practical tasks such as recording videos of yourself.</p>
+        <p class="cdm-sub-heading">By the end of this course, you will:</p>
+        <ul>
+          <li>Learn 5,000+ essential English vocabulary words</li>
+          <li>Master 10,000+ phrases and sentences commonly used by native speakers</li>
+          <li>Communicate confidently in English in daily life</li>
+          <li>Hold natural, fluent conversations in English</li>
+          <li>Improve your speaking, listening, reading, and writing skills</li>
+          <li>Build strong grammar and sentence formation skills</li>
+          <li>Speak English with greater confidence and fluency</li>
+          <li>Polish your presentation and public speaking skills</li>
+          <li>Deliver hour-long speeches in English with confidence</li>
+        </ul>
+        <hr class="cdm-divider"/>
+        <p class="cdm-copyright">Copyright &copy; Master English Academy</p>
+      </div>
+    </div>
+    <!-- Fixed bottom bar: arrow button always visible -->
+    <div class="cdm-bottom-bar">
+      <button class="cdm-arrow-btn" id="cdm-arrow-btn" onclick="cdmScroll()" title="Scroll down">&#8595;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ PAGE 1: COURSE INDEX ═══════════════ -->
+<div id="page-course" class="page with-dash">
+  <div class="course-inner">
+    <div class="course-welcome">
+      <button onclick="showPage('landing')" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.35);color:var(--green-900);font-family:'Nunito',sans-serif;font-size:0.72rem;font-weight:800;padding:5px 13px;border-radius:var(--radius-pill);cursor:pointer;margin-bottom:10px;letter-spacing:.3px;transition:var(--transition);" onmouseover="this.style.background='rgba(255,255,255,0.35)'" onmouseout="this.style.background='rgba(255,255,255,0.18)'">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Back
+      </button>
+      <h2 class="course-welcome-title">Welcome to English Mastery Course</h2>
+    </div>
+    <div style="position:relative;background:rgba(0,0,0,0.08);border-radius:var(--radius-md);padding:8px 10px;margin-bottom:0.75rem;">
+      <button id="weeks-scroll-left" onclick="weeksScrollBy(-180)" style="display:none;position:absolute;left:4px;top:50%;transform:translateY(-50%);z-index:2;width:28px;height:28px;border-radius:50%;background:rgba(6,23,16,0.72);border:1px solid rgba(255,255,255,0.22);color:#fff;font-size:0.8rem;cursor:pointer;align-items:center;justify-content:center;transition:background 0.18s;" onmouseover="this.style.background='rgba(40,168,112,0.8)'" onmouseout="this.style.background='rgba(6,23,16,0.72)'">&#8592;</button>
+      <div class="weeks-nav" id="weeksNav" style="padding-bottom:0;"></div>
+      <button id="weeks-scroll-right" onclick="weeksScrollBy(180)" style="display:none;position:absolute;right:4px;top:50%;transform:translateY(-50%);z-index:2;width:28px;height:28px;border-radius:50%;background:rgba(6,23,16,0.72);border:1px solid rgba(255,255,255,0.22);color:#fff;font-size:0.8rem;cursor:pointer;align-items:center;justify-content:center;transition:background 0.18s;" onmouseover="this.style.background='rgba(40,168,112,0.8)'" onmouseout="this.style.background='rgba(6,23,16,0.72)'">&#8594;</button>
+    </div>
+    <div class="course-progress-wrap">
+      <div class="course-progress-meta">
+        <span class="course-progress-label">Your Progress</span>
+        <span class="course-progress-count" id="course-prog-count">0 / 60 Days</span>
+      </div>
+      <div class="course-progress-track">
+        <div class="course-progress-fill" id="course-prog-fill" style="width:0%"></div>
+      </div>
+    </div>
+    <div class="days-grid" id="daysGrid"></div>
+  </div>
+  <div class="course-footer">
+    <a href="https://wa.me/923498768545" class="wa-highlight">📱 WhatsApp: 03498768545</a>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT — ALL LOGIC
+═══════════════════════════════════════════════════ -->
+<script>
+/* ─── Shared ──────────────────────────────────────── */
+const synth = window.speechSynthesis;
+function speak(text, lang='en-US', rate=0.9) {
+  synth.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = lang; u.rate = rate;
+  const voices = synth.getVoices();
+  if (lang.includes('ur')) u.voice = voices.find(v=>v.lang.includes('ur')) || voices[0];
+  else u.voice = voices.find(v=>v.lang.includes('en') && v.name.includes('Google')) || voices[0];
+  synth.speak(u);
+}
+
+document.querySelectorAll('.yr').forEach(el => el.textContent = new Date().getFullYear());
+
+/* ─── ROUTING ─────────────────────────────────────── */
+const PAGES = ['landing','course','day1','vocab','sentences','practice','convo','test','challenge','assess'];
+const DASH_PAGES = ['day1','vocab','sentences','practice','convo','test','assess','challenge'];
+const NAV_MAP = { vocab:'vocab',sentences:'sentences',practice:'practice',convo:'convo',test:'test',challenge:'challenge',assess:'assess' };
+
+function showPage(id) {
+  synth.cancel();
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const pg = document.getElementById('page-'+id);
+  if (pg) pg.classList.add('active');
+
+  const dash = document.getElementById('universal-dash');
+  if (DASH_PAGES.includes(id)) { dash.classList.add('visible'); }
+  else { dash.classList.remove('visible'); }
+
+  // Update active dashboard button
+  document.querySelectorAll('.ud-btn').forEach(b=>b.classList.remove('active'));
+  if (NAV_MAP[id]) {
+    const match = [...document.querySelectorAll('.ud-btn')].find(b=>b.textContent.toLowerCase().includes(id));
+    if (match) match.classList.add('active');
+  }
+
+  // Update page nav strip
+  pnUpdateStrip(id);
+
+  window.scrollTo(0,0);
+}
+
+function gotoPage(id) {
+  showPage(id);
+}
+function goHome() { showCourse(); buildCourse(); showWeek(1); }
+function showCourse() { showPage('course'); buildCourse(); showWeek(1); }
+
+/* ─── WEEK SCROLL ARROWS (mobile) ─────────────────── */
+function weeksScrollBy(amount) {
+  var nav = document.getElementById('weeksNav');
+  nav.scrollBy({ left: amount, behavior: 'smooth' });
+}
+
+function weeksUpdateArrows() {
+  var nav = document.getElementById('weeksNav');
+  var lBtn = document.getElementById('weeks-scroll-left');
+  var rBtn = document.getElementById('weeks-scroll-right');
+  if (!nav || !lBtn || !rBtn) return;
+  var overflow = nav.scrollWidth > nav.clientWidth + 4;
+  var showLeft = overflow && nav.scrollLeft > 4;
+  var showRight = overflow && nav.scrollLeft < nav.scrollWidth - nav.clientWidth - 4;
+  lBtn.style.display = showLeft ? 'flex' : 'none';
+  rBtn.style.display = showRight ? 'flex' : 'none';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var nav = document.getElementById('weeksNav');
+  if (nav) {
+    nav.addEventListener('scroll', weeksUpdateArrows);
+    window.addEventListener('resize', weeksUpdateArrows);
+  }
+});
+
+/* ─── PAGE NAV STRIP ──────────────────────────────── */
+// Ordered list of inner pages that show the nav strip
+const PN_PAGES = ['day1','vocab','sentences','practice','convo','test','assess','challenge'];
+
+function pnUpdateStrip(currentId) {
+  const strip = document.getElementById('page-nav-strip');
+  const prevBtn = document.getElementById('pn-prev');
+  const nextBtn = document.getElementById('pn-next');
+  const idx = PN_PAGES.indexOf(currentId);
+  if (idx === -1) {
+    strip.classList.remove('visible');
+    return;
+  }
+  strip.classList.add('visible');
+  // day1 (idx===0) prev goes to course, so enable it
+  prevBtn.disabled = false;
+  nextBtn.disabled = false;
+}
+
+function pnNavigate(dir) {
+  synth.cancel();
+  const activePage = document.querySelector('.page.active');
+  if (!activePage) return;
+  const currentId = activePage.id.replace('page-', '');
+  const idx = PN_PAGES.indexOf(currentId);
+  if (idx === -1) return;
+  const newIdx = idx + dir;
+  if (newIdx < 0) {
+    // Before first inner page → go to course/days index
+    showCourse();
+    return;
+  }
+  if (newIdx >= PN_PAGES.length) {
+    // Last page next → go to home
+    goHome();
+    return;
+  }
+  gotoPage(PN_PAGES[newIdx]);
+}
+
+// Hook into showPage to sync strip visibility — handled directly in showPage()
+
+
+/* ─── COURSE INDEX ────────────────────────────────── */
+const days = [
+  {day:1,topic:"Formal & Informal Greetings"},{day:2,topic:"Introducing Yourself"},
+  {day:3,topic:"Personal Pronouns"},{day:4,topic:"Numbers & Age Info"},
+  {day:5,topic:"Days, Months & Time"},{day:6,topic:"Colors & Shapes"},
+  {day:7,topic:"Family & Relationships"},{day:8,topic:"Asking Directions"},
+  {day:9,topic:"Shopping & Prices"},{day:10,topic:"Ordering Food"},
+  {day:11,topic:"Daily Routines"},{day:12,topic:"Talking Weather"},
+  {day:13,topic:"Hobbies & Free Time"},{day:14,topic:"Polite Requests"},
+  {day:15,topic:"School & College Life"},{day:16,topic:"Likes & Dislikes"},
+  {day:17,topic:"Giving Opinions"},{day:18,topic:"Storytelling Basics"},
+  {day:19,topic:"Making Plans"},{day:20,topic:"Apologies & Thanks"},
+  {day:21,topic:"Dreams & Goals"},{day:22,topic:"Appearance Descriptions"},
+  {day:23,topic:"Describing Places"},{day:24,topic:"Emotions & Feelings"},
+  {day:25,topic:"Comparing & Contrasting"},{day:26,topic:"Agreement Logic"},
+  {day:27,topic:"Giving Instructions"},{day:28,topic:"Health & Body"},
+  {day:29,topic:"Short Presentations"},{day:30,topic:"Debating Skills"},
+  {day:31,topic:"Vivid Storytelling"},{day:32,topic:"Interview Confidence"},
+  {day:33,topic:"Current Events"},{day:34,topic:"Cause & Effect"},
+  {day:35,topic:"Persuasion Skills"},{day:36,topic:"Everyday Idioms"},
+  {day:37,topic:"Problem Solving"},{day:38,topic:"Online Communication"},
+  {day:39,topic:"Formal Register"},{day:40,topic:"Pros & Cons"},
+  {day:41,topic:"Professional Vocab"},{day:42,topic:"Trends & Stats"},
+  {day:43,topic:"Difficult Talks"},{day:44,topic:"Native Fluency Stories"},
+  {day:45,topic:"Motivational Speaking"},{day:46,topic:"Cultural Sensitivity"},
+  {day:47,topic:"Advanced Power Words"},{day:48,topic:"Hypotheticals"},
+  {day:49,topic:"Spoken Grammar"},{day:50,topic:"Impromptu Speaking"},
+  {day:51,topic:"Body Language"},{day:52,topic:"Extended Monologue"},
+  {day:53,topic:"Q&A Handling"},{day:54,topic:"Painting with Words"},
+  {day:55,topic:"Panel Hosting"},{day:56,topic:"Humour & Wit"},
+  {day:57,topic:"Seamless Flow"},{day:58,topic:"Public Speaking"},
+  {day:59,topic:"The 59-Day Journey"},{day:60,topic:"Final 1-Hour Challenge"}
+];
+
+let courseBuilt = false;
+function buildCourse() {
+  if (courseBuilt) return; courseBuilt = true;
+  const nav = document.getElementById('weeksNav');
+  const grid = document.getElementById('daysGrid');
+
+  for (let w=1;w<=9;w++) {
+    const btn = document.createElement('button');
+    btn.className='week-pill'; btn.textContent='Week '+w;
+    btn.onclick=()=>showWeek(w); btn.id='wpill-'+w;
+    nav.appendChild(btn);
+  }
+
+  days.forEach(d => {
+    const week = Math.ceil(d.day/7);
+    if ((d.day-1)%7===0) {
+      const wl = document.createElement('div');
+      const weekTitles=['Foundations','Everyday Communication','Conversational Fluency','Descriptions & Expressions','Advanced Communication','Fluency Deepening','Advanced Fluency','Mastery','Mastery'];
+      wl.className='week-label'; wl.id='wlabel-'+week;
+      wl.textContent='Week '+week+': '+(weekTitles[week-1]||'Mastery'); wl.dataset.week=week;
+      grid.appendChild(wl);
+    }
+    const card = document.createElement('div');
+    card.className='day-card'; card.dataset.week=week; card.id='daycard-'+d.day;
+    card.onclick = () => { openDay(d.day); };
+    card.innerHTML=`<div class="day-header"><div class="day-badge" id="daybadge-${d.day}"><span>DAY</span><strong>${d.day}</strong></div><div class="day-topic">${d.topic}</div></div>`;
+    grid.appendChild(card);
+
+    if (d.day%7===0) {
+      const rev = document.createElement('div');
+      rev.className='weekly-review'; rev.dataset.week=week;
+      rev.innerHTML=`<div class="day-header"><div class="week-badge"><span>WEEK</span><strong>${week}</strong></div><div class="review-topic">Review &amp; Assessment</div></div>`;
+      grid.appendChild(rev);
+    }
+  });
+  setTimeout(weeksUpdateArrows, 100);
+  loadProgress();
+}
+
+/* ─── DAY NAVIGATION (checks if file exists) ──────── */
+function openDay(dayNum) {
+  var url = dayNum + '.html';
+  fetch(url, { method: 'HEAD' })
+    .then(function(res) {
+      if (res.ok) {
+        window.location.href = url;
+      } else {
+        window.location.href = 'comingsoon.html';
+      }
+    })
+    .catch(function() {
+      window.location.href = 'comingsoon.html';
+    });
+}
+
+/* ─── PROGRESS (read/write localStorage) ──────────── */
+function getCompletedDays() {
+  try {
+    return JSON.parse(localStorage.getItem('emc_completed_days') || '[]');
+  } catch(e) { return []; }
+}
+
+function loadProgress() {
+  var completed = getCompletedDays();
+  var count = completed.length;
+  var total = 60;
+  document.getElementById('course-prog-count').textContent = count + ' / ' + total + ' Days';
+  document.getElementById('course-prog-fill').style.width = ((count / total) * 100) + '%';
+  // Mark completed day cards visually
+  completed.forEach(function(dayNum) {
+    var badge = document.getElementById('daybadge-' + dayNum);
+    var card = document.getElementById('daycard-' + dayNum);
+    if (badge) {
+      badge.style.background = 'var(--gold-mid)';
+      badge.innerHTML = '<span>DAY</span><strong>' + dayNum + '</strong><span style="font-size:0.7rem;">✓</span>';
+    }
+    if (card) {
+      card.style.borderColor = 'rgba(244,208,63,0.5)';
+    }
+  });
+}
+
+function showWeek(w) {
+  document.querySelectorAll('.week-pill').forEach(p=>p.classList.remove('active'));
+  const pill = document.getElementById('wpill-'+w);
+  if (pill) pill.classList.add('active');
+  document.querySelectorAll('.day-card,.week-label,.weekly-review').forEach(el=>{
+    el.classList.toggle('visible', parseInt(el.dataset.week)===w);
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(weeksUpdateArrows, 50);
+}
+
+/* ─── VOCABULARY ──────────────────────────────────── */
+const vocab = [
+  // Personal Pronouns (1–13)
+  {word:"I",urdu:"میں"},
+  {word:"You",urdu:"تم / آپ"},
+  {word:"He",urdu:"وہ (مذکر)"},
+  {word:"She",urdu:"وہ (مونث)"},
+  {word:"It",urdu:"یہ / وہ"},
+  {word:"We",urdu:"ہم"},
+  {word:"They",urdu:"وہ"},
+  {word:"My",urdu:"میرا / میری"},
+  {word:"Your",urdu:"تمہارا / آپ کا"},
+  {word:"His",urdu:"اس کا (مذکر)"},
+  {word:"Her",urdu:"اس کا (مونث)"},
+  {word:"Our",urdu:"ہمارا"},
+  {word:"Their",urdu:"ان کا"},
+  // Be Structure (14–19)
+  {word:"Am",urdu:"ہوں"},
+  {word:"Is",urdu:"ہے"},
+  {word:"Are",urdu:"ہیں"},
+  {word:"Be",urdu:"ہونا"},
+  {word:"Was",urdu:"تھا / تھی"},
+  {word:"Were",urdu:"تھے"},
+  // Family Members (20–29)
+  {word:"Family",urdu:"خاندان"},
+  {word:"Brother",urdu:"بھائی"},
+  {word:"Sister",urdu:"بہن"},
+  {word:"Parents",urdu:"والدین"},
+  {word:"Father",urdu:"والد"},
+  {word:"Mother",urdu:"والدہ"},
+  {word:"Grandfather",urdu:"دادا / نانا"},
+  {word:"Cousin",urdu:"کزن"},
+  {word:"Friend",urdu:"دوست"},
+  {word:"Classmate",urdu:"ہم جماعت"},
+  // Home, School & Pet (30–37)
+  {word:"Dog",urdu:"کتا"},
+  {word:"Cat",urdu:"بلی"},
+  {word:"House",urdu:"گھر"},
+  {word:"Book",urdu:"کتاب"},
+  {word:"School",urdu:"اسکول"},
+  {word:"Class",urdu:"کلاس"},
+  {word:"Park",urdu:"پارک"},
+  {word:"Home",urdu:"گھر"},
+  // Daily Action Words (38–49)
+  {word:"Live",urdu:"رہنا"},
+  {word:"Like",urdu:"پسند کرنا"},
+  {word:"Love",urdu:"محبت کرنا"},
+  {word:"Read",urdu:"پڑھنا"},
+  {word:"Play",urdu:"کھیلنا"},
+  {word:"Learn",urdu:"سیکھنا"},
+  {word:"Help",urdu:"مدد کرنا"},
+  {word:"Care",urdu:"خیال رکھنا"},
+  {word:"Introduce",urdu:"تعارف کروانا"},
+  {word:"Meet",urdu:"ملنا"},
+  {word:"Tell",urdu:"بتانا"},
+  {word:"Become",urdu:"بننا"},
+  // Education & Jobs (50–53)
+  {word:"Student",urdu:"طالب علم"},
+  {word:"Teacher",urdu:"استاد"},
+  {word:"Doctor",urdu:"ڈاکٹر"},
+  {word:"Entrepreneur",urdu:"کاروباری شخص"},
+  // Time & Age (54–58)
+  {word:"Today",urdu:"آج"},
+  {word:"Day",urdu:"دن"},
+  {word:"Future",urdu:"مستقبل"},
+  {word:"Years",urdu:"سال"},
+  {word:"Old",urdu:"پرانا"},
+  // Question & Conversation Words (59–66)
+  {word:"Who",urdu:"کون"},
+  {word:"What",urdu:"کیا"},
+  {word:"Where",urdu:"کہاں"},
+  {word:"This",urdu:"یہ"},
+  {word:"These",urdu:"یہ (جمع)"},
+  {word:"From",urdu:"سے"},
+  {word:"Here",urdu:"یہاں"},
+  {word:"All",urdu:"سب"},
+  // Describing Words (67–100)
+  {word:"Happy",urdu:"خوش"},
+  {word:"Kind",urdu:"مہربان"},
+  {word:"Smart",urdu:"ذہین"},
+  {word:"Friendly",urdu:"دوستانہ"},
+  {word:"Polite",urdu:"شائستہ"},
+  {word:"Honest",urdu:"ایماندار"},
+  {word:"Busy",urdu:"مصروف"},
+  {word:"Ready",urdu:"تیار"},
+  {word:"Tall",urdu:"لمبا"},
+  {word:"Beautiful",urdu:"خوبصورت"},
+  {word:"Big",urdu:"بڑا"},
+  {word:"Clean",urdu:"صاف"},
+  {word:"Cute",urdu:"پیارا"},
+  {word:"Loyal",urdu:"وفادار"},
+  {word:"Wise",urdu:"دانا"},
+  {word:"Loving",urdu:"محبت کرنے والا"},
+  {word:"Hardworking",urdu:"محنتی"},
+  {word:"Helpful",urdu:"مددگار"},
+  {word:"Funny",urdu:"مزاحیہ"},
+  {word:"Active",urdu:"متحرک"},
+  {word:"Good",urdu:"اچھا"},
+  {word:"Amazing",urdu:"شاندار"},
+  {word:"Strong",urdu:"مضبوط"},
+  {word:"Fast",urdu:"تیز"},
+  {word:"Slow",urdu:"سست"},
+  {word:"Easy",urdu:"آسان"},
+  {word:"Difficult",urdu:"مشکل"},
+  {word:"New",urdu:"نیا"},
+  {word:"Young",urdu:"جوان"},
+  {word:"Old",urdu:"پرانا / بوڑھا"},
+  {word:"Important",urdu:"اہم"},
+  {word:"Different",urdu:"مختلف"},
+  {word:"Same",urdu:"ایک جیسا"},
+  {word:"Simple",urdu:"سادہ"},
+];
+
+const vGradients = [
+  "linear-gradient(135deg,#134e2a 0%,#166534 55%,#15803d 100%)",
+  "linear-gradient(135deg,#1a5c35 0%,#1e7845 55%,#1a9e55 100%)",
+  "linear-gradient(135deg,#0f4d2a 0%,#1b6e3d 55%,#219150 100%)"
+];
+let vIdx=0, vFlipped=false, vStarted=false;
+
+function vStart() {
+  vStarted = true;
+  document.getElementById('v-start-overlay').style.display = 'none';
+  document.getElementById('v-start-main-btn').style.display = 'none';
+  document.getElementById('v-prev').style.visibility = 'visible';
+  document.getElementById('v-next').style.visibility = 'visible';
+  speak(vocab[vIdx].word);
+}
+
+function vRender(idx) {
+  const v=vocab[idx];
+  document.getElementById('v-word').textContent=v.word;
+  document.getElementById('v-word-back').textContent=v.word;
+  document.getElementById('v-urdu').textContent=v.urdu;
+  document.getElementById('v-card-front').style.setProperty('--card-gradient', vGradients[idx%3]);
+  document.getElementById('v-prog-text').textContent=`${idx+1} / ${vocab.length}`;
+  document.getElementById('v-prog-fill').style.width=`${((idx+1)/vocab.length)*100}%`;
+  document.getElementById('v-prev').disabled = idx===0;
+  const vNextBtn = document.getElementById('v-next');
+  if (idx === vocab.length - 1) {
+    vNextBtn.disabled = false;
+    vNextBtn.textContent = 'Next ▶';
+    vNextBtn.onclick = () => { gotoPage('sentences'); };
+    document.getElementById('v-restart-btn').style.display = '';
+  } else {
+    vNextBtn.disabled = false;
+    vNextBtn.textContent = 'Next ▶';
+    vNextBtn.onclick = vNext;
+    document.getElementById('v-restart-btn').style.display = 'none';
+  }
+  if (vStarted) setTimeout(()=>speak(v.word),300);
+}
+
+function vNext(){if(vIdx<vocab.length-1){vIdx++;vFlipped=false;vRender(vIdx);}}
+function vPrev(){if(vIdx>0){vIdx--;vFlipped=false;vRender(vIdx);}}
+function vRestart(){
+  vIdx=0; vFlipped=false; vStarted=true;
+  document.getElementById('v-flashcard').classList.remove('flipped');
+  document.getElementById('v-restart-btn').style.display='none';
+  vRender(0);
+}
+synth.getVoices();
+
+/* ─── SENTENCES ───────────────────────────────────── */
+const phrases = [
+  // What questions (1–50)
+  {cat:"What Questions", en:"What is your name?", ur:"آپ کا نام کیا ہے؟", ps:"ستا نوم څه دی؟"},
+  {cat:"What Questions", en:"My name is Ali.", ur:"میرا نام علی ہے۔", ps:"زما نوم علي دی۔"},
+  {cat:"What Questions", en:"What is this?", ur:"یہ کیا ہے؟", ps:"دا څه شی دی؟"},
+  {cat:"What Questions", en:"This is a pen.", ur:"یہ ایک قلم ہے۔", ps:"دا یو قلم دی۔"},
+  {cat:"What Questions", en:"What do you do?", ur:"آپ کیا کرتے ہو؟", ps:"ته څه کوې؟"},
+  {cat:"What Questions", en:"I am a student.", ur:"میں ایک طالب علم ہوں۔", ps:"زه زده کوونکی یم۔"},
+  {cat:"What Questions", en:"What is your favorite color?", ur:"آپ کا پسندیدہ رنگ کیا ہے؟", ps:"ستا خوښ رنګ کوم دی؟"},
+  {cat:"What Questions", en:"My favorite color is blue.", ur:"میرا پسندیدہ رنگ نیلا ہے۔", ps:"زما خوښ رنګ نیلي دی۔"},
+  {cat:"What Questions", en:"What is your favorite food?", ur:"آپ کا پسندیدہ کھانا کیا ہے؟", ps:"ستا خوښ خواړه کوم دي؟"},
+  {cat:"What Questions", en:"My favorite food is biryani.", ur:"میرا پسندیدہ کھانا بریانی ہے۔", ps:"زما خوښ خواړه بریاني دي۔"},
+  {cat:"What Questions", en:"What is your school name?", ur:"آپ کے مدرسے کا نام کیا ہے؟", ps:"ستا د سکول نوم څه دی؟"},
+  {cat:"What Questions", en:"My school name is ABC School.", ur:"میرا مدرسہ اے بی سی ہے۔", ps:"زما سکول ABC دی۔"},
+  {cat:"What Questions", en:"What is in your bag?", ur:"آپ کے بستے میں کیا ہے؟", ps:"ستا په بکس کې څه دي؟"},
+  {cat:"What Questions", en:"Books and pen are in my bag.", ur:"میرے بستے میں کتابیں اور قلم ہیں۔", ps:"زما په بکس کې کتابونه او قلمونه دي۔"},
+  {cat:"What Questions", en:"What are you doing?", ur:"آپ کیا کر رہے ہو؟", ps:"ته څه کوې؟"},
+  {cat:"What Questions", en:"I am studying.", ur:"میں پڑھ رہا ہوں۔", ps:"زه سبق وایم۔"},
+  {cat:"What Questions", en:"What is the time?", ur:"کتنا وقت ہوا ہے؟", ps:"څو بجې دي؟"},
+  {cat:"What Questions", en:"It is 10 o'clock.", ur:"دس بج گئے ہیں۔", ps:"لس بجې شوي دي۔"},
+  {cat:"What Questions", en:"What is your hobby?", ur:"آپ کا شوق کیا ہے؟", ps:"ستا شوق څه دی؟"},
+  {cat:"What Questions", en:"My hobby is reading.", ur:"میرا شوق مطالعہ ہے۔", ps:"زما شوق سبق لوستل دي۔"},
+  {cat:"What Questions", en:"What do you like?", ur:"آپ کو کیا پسند ہے؟", ps:"ته څه خوښوې؟"},
+  {cat:"What Questions", en:"I like football.", ur:"مجھے فٹبال پسند ہے۔", ps:"ما ته فوټبال ښه لګي۔"},
+  {cat:"What Questions", en:"What do you want?", ur:"آپ کیا چاہتے ہو؟", ps:"ته څه غواړې؟"},
+  {cat:"What Questions", en:"I want a pen.", ur:"مجھے ایک قلم چاہیے۔", ps:"ما ته یو قلم پکار دی۔"},
+  {cat:"What Questions", en:"What is your phone number?", ur:"آپ کا فون نمبر کیا ہے؟", ps:"ستا د موبایل نمبر څه دی؟"},
+  {cat:"What Questions", en:"My phone number is 123456789.", ur:"میرا فون نمبر 123456789 ہے۔", ps:"زما نمبر 123456789 دی۔"},
+  {cat:"What Questions", en:"What is your favorite subject?", ur:"آپ کا پسندیدہ مضمون کیا ہے؟", ps:"ستا خوښ سبجېکټ کوم دی؟"},
+  {cat:"What Questions", en:"My favorite subject is English.", ur:"میرا پسندیدہ مضمون انگریزی ہے۔", ps:"زما خوښ سبجېکټ انګلیسي دی۔"},
+  {cat:"What Questions", en:"What is your friend's name?", ur:"آپ کے دوست کا نام کیا ہے؟", ps:"ستا د ملګري نوم څه دی؟"},
+  {cat:"What Questions", en:"My friend's name is Ahmed.", ur:"میرے دوست کا نام احمد ہے۔", ps:"زما د ملګري نوم احمد دی۔"},
+  {cat:"What Questions", en:"What are you eating?", ur:"آپ کیا کھا رہے ہو؟", ps:"ته څه خوري؟"},
+  {cat:"What Questions", en:"I am eating rice.", ur:"میں چاول کھا رہا ہوں۔", ps:"زه وريجې خورم۔"},
+  {cat:"What Questions", en:"What is your dream?", ur:"آپ کا خواب کیا ہے؟", ps:"ستا خوب څه دی؟"},
+  {cat:"What Questions", en:"My dream is to become a teacher.", ur:"میرا خواب استاد بننا ہے۔", ps:"زما خوب استاد جوړېدل دي۔"},
+  {cat:"What Questions", en:"What is your age?", ur:"آپ کی عمر کیا ہے؟", ps:"ستا عمر څو دی؟"},
+  {cat:"What Questions", en:"I am 12 years old.", ur:"میری عمر بارہ سال ہے۔", ps:"زما عمر ۱۲ کاله دی۔"},
+  {cat:"What Questions", en:"What is your favorite sport?", ur:"آپ کا پسندیدہ کھیل کیا ہے؟", ps:"ستا خوښ لوبه کومه ده؟"},
+  {cat:"What Questions", en:"My favorite sport is cricket.", ur:"میرا پسندیدہ کھیل کرکٹ ہے۔", ps:"زما خوښ لوبه کرکټ ده۔"},
+  {cat:"What Questions", en:"What do you study?", ur:"آپ کیا پڑھتے ہو؟", ps:"ته څه لولې؟"},
+  {cat:"What Questions", en:"I study English and Math.", ur:"میں انگریزی اور ریاضی پڑھتا ہوں۔", ps:"زه انګلیسي او ریاضي لولم۔"},
+  {cat:"What Questions", en:"What is your father's name?", ur:"آپ کے والد کا نام کیا ہے؟", ps:"د ستا د پلار نوم څه دی؟"},
+  {cat:"What Questions", en:"My father's name is Ahmad.", ur:"میرے والد کا نام احمد ہے۔", ps:"زما د پلار نوم احمد دی۔"},
+  {cat:"What Questions", en:"What is your mother's name?", ur:"آپ کی والدہ کا نام کیا ہے؟", ps:"د ستا د مور نوم څه دی؟"},
+  {cat:"What Questions", en:"My mother's name is Fatima.", ur:"میری والدہ کا نام فاطمہ ہے۔", ps:"زما د مور نوم فاطمه دی۔"},
+  {cat:"What Questions", en:"What is your favorite animal?", ur:"آپ کا پسندیدہ جانور کیا ہے؟", ps:"ستا خوښ حیوان کوم دی؟"},
+  {cat:"What Questions", en:"My favorite animal is a cat.", ur:"میرا پسندیدہ جانور بلی ہے۔", ps:"زما خوښ حیوان پیشو ده۔"},
+  {cat:"What Questions", en:"What is your country name?", ur:"آپ کے ملک کا نام کیا ہے؟", ps:"ستا د وطن نوم څه دی؟"},
+  {cat:"What Questions", en:"My country name is Pakistan.", ur:"میرا ملک پاکستان ہے۔", ps:"زما وطن پاکستان دی۔"},
+  {cat:"What Questions", en:"What is your favorite place?", ur:"آپ کی پسندیدہ جگہ کیا ہے؟", ps:"ستا خوښه ځای کوم دی؟"},
+  {cat:"What Questions", en:"My favorite place is school.", ur:"میری پسندیدہ جگہ مدرسہ ہے۔", ps:"زما خوښه ځای سکول دی۔"},
+  // Who questions (51–70)
+  {cat:"Who Questions", en:"Who are you?", ur:"آپ کون ہیں؟", ps:"ته څوک یې؟"},
+  {cat:"Who Questions", en:"I am a student.", ur:"میں ایک طالب علم ہوں۔", ps:"زه زده کوونکی یم۔"},
+  {cat:"Who Questions", en:"Who is he?", ur:"وہ کون ہے؟", ps:"هغه څوک دی؟"},
+  {cat:"Who Questions", en:"He is my brother.", ur:"وہ میرا بھائی ہے۔", ps:"هغه زما ورور دی۔"},
+  {cat:"Who Questions", en:"Who is she?", ur:"وہ کون ہے؟", ps:"هغه څوک ده؟"},
+  {cat:"Who Questions", en:"She is my sister.", ur:"وہ میری بہن ہے۔", ps:"هغه زما خور ده۔"},
+  {cat:"Who Questions", en:"Who is your teacher?", ur:"آپ کے استاد کون ہیں؟", ps:"ستا استاد څوک دی؟"},
+  {cat:"Who Questions", en:"He is my teacher.", ur:"وہ میرے استاد ہیں۔", ps:"هغه زما استاد دی۔"},
+  {cat:"Who Questions", en:"Who is your friend?", ur:"آپ کا دوست کون ہے؟", ps:"ستا ملګری څوک دی؟"},
+  {cat:"Who Questions", en:"He is my friend.", ur:"وہ میرا دوست ہے۔", ps:"هغه زما ملګری دی۔"},
+  {cat:"Who Questions", en:"Who is calling you?", ur:"آپ کو کون فون کر رہا ہے؟", ps:"تا ته څوک زنګ وهي؟"},
+  {cat:"Who Questions", en:"My father is calling me.", ur:"میرے والد مجھے فون کر رہے ہیں۔", ps:"زما پلار راته زنګ وهي۔"},
+  {cat:"Who Questions", en:"Who is in the classroom?", ur:"جماعت میں کون ہے؟", ps:"په کلاس کې څوک دي؟"},
+  {cat:"Who Questions", en:"Students are in the classroom.", ur:"جماعت میں طلبہ موجود ہیں۔", ps:"په کلاس کې زده کوونکي دي۔"},
+  {cat:"Who Questions", en:"Who made this?", ur:"یہ کس نے بنایا ہے؟", ps:"دا چا جوړ کړي دي؟"},
+  {cat:"Who Questions", en:"My teacher made this.", ur:"یہ میرے استاد نے بنایا ہے۔", ps:"دا زما استاد جوړ کړي دي۔"},
+  {cat:"Who Questions", en:"Who is your favorite person?", ur:"آپ کا پسندیدہ انسان کون ہے؟", ps:"ستا خوښ انسان څوک دی؟"},
+  {cat:"Who Questions", en:"My mother is my favorite person.", ur:"میری والدہ میری پسندیدہ انسان ہیں۔", ps:"زما مور زما خوښه انسان ده۔"},
+  {cat:"Who Questions", en:"Who is absent today?", ur:"آج کون غیر حاضر ہے؟", ps:"نن څوک غیر حاضر دی؟"},
+  {cat:"Who Questions", en:"Ali is absent today.", ur:"علی آج غیر حاضر ہے۔", ps:"علي نن غیر حاضر دی۔"},
+  // Where questions (71–90)
+  {cat:"Where Questions", en:"Where are you?", ur:"آپ کہاں ہیں؟", ps:"ته چېرته یې؟"},
+  {cat:"Where Questions", en:"I am at home.", ur:"میں گھر پر ہوں۔", ps:"زه په کور کې یم۔"},
+  {cat:"Where Questions", en:"Where is your school?", ur:"آپ کا مدرسہ کہاں ہے؟", ps:"ستا سکول چېرته دی؟"},
+  {cat:"Where Questions", en:"My school is in Rawalpindi.", ur:"میرا مدرسہ راولپنڈی میں ہے۔", ps:"زما سکول په راولپنډۍ کې دی۔"},
+  {cat:"Where Questions", en:"Where do you live?", ur:"آپ کہاں رہتے ہیں؟", ps:"ته چېرته اوسیږې؟"},
+  {cat:"Where Questions", en:"I live in Islamabad.", ur:"میں اسلام آباد میں رہتا ہوں۔", ps:"زه په اسلام آباد کې اوسیږم۔"},
+  {cat:"Where Questions", en:"Where is your book?", ur:"آپ کی کتاب کہاں ہے؟", ps:"ستا کتاب چېرته دی؟"},
+  {cat:"Where Questions", en:"My book is on the table.", ur:"میری کتاب میز پر ہے۔", ps:"زما کتاب په مېز باندې دی۔"},
+  {cat:"Where Questions", en:"Where are you going?", ur:"آپ کہاں جا رہے ہیں؟", ps:"ته چېرته ځې؟"},
+  {cat:"Where Questions", en:"I am going to school.", ur:"میں مدرسے جا رہا ہوں۔", ps:"زه سکول ته ځم۔"},
+  {cat:"Where Questions", en:"Where is your friend?", ur:"آپ کا دوست کہاں ہے؟", ps:"ستا ملګری چېرته دی؟"},
+  {cat:"Where Questions", en:"My friend is at school.", ur:"میرا دوست مدرسے میں ہے۔", ps:"زما ملګری په سکول کې دی۔"},
+  {cat:"Where Questions", en:"Where do you study?", ur:"آپ کہاں پڑھتے ہیں؟", ps:"ته چېرته لولې؟"},
+  {cat:"Where Questions", en:"I study at school.", ur:"میں مدرسے میں پڑھتا ہوں۔", ps:"زه په سکول کې لولم۔"},
+  {cat:"Where Questions", en:"Where is the bathroom?", ur:"غسل خانہ کہاں ہے؟", ps:"باتخلا چېرته ده؟"},
+  {cat:"Where Questions", en:"The bathroom is there.", ur:"غسل خانہ وہاں ہے۔", ps:"باتخلا هلته ده۔"},
+  {cat:"Where Questions", en:"Where is your house?", ur:"آپ کا گھر کہاں ہے؟", ps:"ستا کور چېرته دی؟"},
+  {cat:"Where Questions", en:"My house is in the city.", ur:"میرا گھر شہر میں ہے۔", ps:"زما کور په ښار کې دی۔"},
+  {cat:"Where Questions", en:"Where are your shoes?", ur:"آپ کے جوتے کہاں ہیں؟", ps:"ستا بوټان چېرته دي؟"},
+  {cat:"Where Questions", en:"My shoes are under the bed.", ur:"میرے جوتے بستر کے نیچے ہیں۔", ps:"زما بوټان د کټ لاندې دي۔"},
+  // When questions (91–100)
+  {cat:"When Questions", en:"When is your birthday?", ur:"آپ کی سالگرہ کب ہے؟", ps:"ستا د زوکړې ورځ کله ده؟"},
+  {cat:"When Questions", en:"My birthday is in June.", ur:"میری سالگرہ جون میں ہے۔", ps:"زما د زوکړې ورځ په جون کې ده۔"},
+  {cat:"When Questions", en:"When do you go to school?", ur:"آپ مدرسے کب جاتے ہیں؟", ps:"ته سکول ته کله ځې؟"},
+  {cat:"When Questions", en:"I go to school at 8 o'clock.", ur:"میں آٹھ بجے مدرسے جاتا ہوں۔", ps:"زه اته بجې سکول ته ځم۔"},
+  {cat:"When Questions", en:"When do you sleep?", ur:"آپ کب سوتے ہیں؟", ps:"ته کله ویده کېږې؟"},
+  {cat:"When Questions", en:"I sleep at 10 o'clock.", ur:"میں دس بجے سوتا ہوں۔", ps:"زه لس بجې ویده کېږم۔"},
+  {cat:"When Questions", en:"When is the class?", ur:"جماعت کب ہوتی ہے؟", ps:"کلاس کله وي؟"},
+  {cat:"When Questions", en:"The class is in the morning.", ur:"جماعت صبح ہوتی ہے۔", ps:"کلاس سهار وي۔"},
+  {cat:"When Questions", en:"When do you eat lunch?", ur:"آپ دوپہر کا کھانا کب کھاتے ہیں؟", ps:"ته ډوډۍ کله خوري؟"},
+  {cat:"When Questions", en:"I eat lunch at 1 o'clock.", ur:"میں ایک بجے دوپہر کا کھانا کھاتا ہوں۔", ps:"زه په یوه بجه ډوډۍ خورم۔"},
+  // How questions (101–120)
+  {cat:"How Questions", en:"How are you?", ur:"آپ کیسے ہیں؟", ps:"ته څنګه یې؟"},
+  {cat:"How Questions", en:"I am fine.", ur:"میں ٹھیک ہوں۔", ps:"زه ښه یم۔"},
+  {cat:"How Questions", en:"How old are you?", ur:"آپ کی عمر کیا ہے؟", ps:"ستا عمر څو دی؟"},
+  {cat:"How Questions", en:"I am 12 years old.", ur:"میری عمر بارہ سال ہے۔", ps:"زما عمر ۱۲ کاله دی۔"},
+  {cat:"How Questions", en:"How do you go to school?", ur:"آپ مدرسے کیسے جاتے ہیں؟", ps:"ته سکول ته څنګه ځې؟"},
+  {cat:"How Questions", en:"I go to school by bus.", ur:"میں بس کے ذریعے جاتا ہوں۔", ps:"زه د بس په واسطه ځم۔"},
+  {cat:"How Questions", en:"How is the weather?", ur:"موسم کیسا ہے؟", ps:"موسم څنګه دی؟"},
+  {cat:"How Questions", en:"The weather is sunny.", ur:"موسم دھوپ والا ہے۔", ps:"موسم ښه دی / لمر دی۔"},
+  {cat:"How Questions", en:"How do you feel?", ur:"آپ کیسا محسوس کر رہے ہیں؟", ps:"ته څنګه احساس کوې؟"},
+  {cat:"How Questions", en:"I feel happy.", ur:"میں خوش ہوں۔", ps:"زه خوشحاله یم۔"},
+  {cat:"How Questions", en:"How do you study?", ur:"آپ کیسے پڑھتے ہیں؟", ps:"ته څنګه لولې؟"},
+  {cat:"How Questions", en:"I study with focus.", ur:"میں توجہ سے پڑھتا ہوں۔", ps:"زه په توجه سره لولم۔"},
+  {cat:"How Questions", en:"How is your day?", ur:"آپ کا دن کیسا ہے؟", ps:"ستا ورځ څنګه ده؟"},
+  {cat:"How Questions", en:"My day is good.", ur:"میرا دن اچھا ہے۔", ps:"زما ورځ ښه ده۔"},
+  {cat:"How Questions", en:"How do you come here?", ur:"آپ یہاں کیسے آتے ہیں؟", ps:"ته دلته څنګه راځې؟"},
+  {cat:"How Questions", en:"I come here by car.", ur:"میں گاڑی کے ذریعے آتا ہوں۔", ps:"زه د موټر په واسطه راځم۔"},
+  {cat:"How Questions", en:"How do you learn English?", ur:"آپ انگریزی کیسے سیکھتے ہیں؟", ps:"ته انګلیسي څنګه زده کوې؟"},
+  {cat:"How Questions", en:"I learn English by practice.", ur:"میں مشق کے ذریعے سیکھتا ہوں۔", ps:"زه د تمرین په واسطه زده کوم۔"},
+  {cat:"How Questions", en:"How is your family?", ur:"آپ کا گھر کیسا ہے؟", ps:"ستا کور څنګه دی؟"},
+  {cat:"How Questions", en:"My family is good.", ur:"میرا گھر ٹھیک ہے۔", ps:"زما کور ښه دی۔"},
+];
+let sIdx=0;
+let sSpeaking = false;
+function sToggleStartStop() {
+  const btn = document.getElementById('s-speak');
+  if (!document.getElementById('s-start-overlay').style.display || document.getElementById('s-start-overlay').style.display !== 'none') {
+    // First time: start
+    sStart();
+    return;
+  }
+  if (sSpeaking) {
+    synth.cancel();
+    sSpeaking = false;
+    btn.textContent = '▶ Start';
+  } else {
+    sSpeaking = true;
+    btn.textContent = '⏹ Stop';
+    speak(phrases[sIdx].en);
+  }
+}
+function sStart() {
+  document.getElementById('s-start-overlay').style.display = 'none';
+  document.getElementById('s-prev').style.visibility = 'visible';
+  document.getElementById('s-next').style.visibility = 'visible';
+  sSpeaking = true;
+  sRender(true);
+}
+function sRender(speak_=false) {
+  const p=phrases[sIdx];
+  document.getElementById('s-en').textContent=p.en;
+  document.getElementById('s-ur').innerHTML=`<strong>${p.ur}</strong>`;
+  document.getElementById('s-ps').innerHTML=`<strong>${p.ps}</strong>`;
+  document.getElementById('s-cat').textContent=p.cat;
+  document.getElementById('s-counter').textContent=`${sIdx+1} / ${phrases.length}`;
+  document.getElementById('s-prog').style.width=`${((sIdx+1)/phrases.length)*100}%`;
+  document.getElementById('s-prev').disabled=sIdx===0;
+  const sNextBtn = document.getElementById('s-next');
+  if (sIdx === phrases.length - 1) {
+    sNextBtn.disabled = false;
+    sNextBtn.textContent = 'Next ▶';
+    sNextBtn.onclick = () => { gotoPage('practice'); };
+    sSpeaking = false;
+  } else {
+    sNextBtn.disabled = false;
+    sNextBtn.textContent = 'Next ▶';
+    sNextBtn.onclick = () => sNav(1);
+  }
+  if(speak_ && sSpeaking) speak(p.en);
+}
+function sNav(d) {
+  sIdx=Math.max(0,Math.min(phrases.length-1,sIdx+d));
+  const fc=document.getElementById('s-flashcard');
+  fc.classList.add('animating');
+  setTimeout(()=>{sRender(true);fc.classList.remove('animating');},50);
+}
+function sSpeak(){speak(phrases[sIdx].en);}
+
+/* ─── PRACTICE (Teleprompter) ─────────────────────── */
+const chunks=[
+
+  // ═══ 1. Ahmad — Greeting & Self-Introduction ═══
+  {text:"── Ahmad: Greeting & Self-Introduction ──", urdu:"احمد: سلام اور اپنا تعارف"},
+
+  {text:"Hello", urdu:"ہیلو"},
+  {text:"Hello everyone!", urdu:"ہیلو سب کو!"},
+
+  {text:"Today,", urdu:"آج،"},
+  {text:"Today, I will introduce", urdu:"آج، میں تعارف کروانا چاہتا ہوں"},
+  {text:"Today, I will introduce myself and my family.", urdu:"آج، میں اپنا اور اپنے خاندان کا تعارف کروانا چاہتا ہوں۔"},
+
+  {text:"My name", urdu:"میرا نام"},
+  {text:"My name is Ahmad.", urdu:"میرا نام احمد ہے۔"},
+
+  {text:"I am", urdu:"میں ہوں"},
+  {text:"I am 13 years old.", urdu:"میں 13 سال کا ہوں۔"},
+
+  {text:"I am", urdu:"میں ہوں"},
+  {text:"I am from Pakistan.", urdu:"میں پاکستان سے ہوں۔"},
+
+  {text:"I live", urdu:"میں رہتا ہوں"},
+  {text:"I live in Islamabad.", urdu:"میں اسلام آباد میں رہتا ہوں۔"},
+
+  {text:"I am", urdu:"میں ہوں"},
+  {text:"I am a student.", urdu:"میں ایک طالب علم ہوں۔"},
+
+  {text:"I like", urdu:"مجھے پسند ہے"},
+  {text:"I like reading books", urdu:"مجھے کتابیں پڑھنا پسند ہے"},
+  {text:"I like reading books and playing cricket.", urdu:"مجھے کتابیں پڑھنا اور کرکٹ کھیلنا پسند ہے۔"},
+
+  {text:"I am", urdu:"میں ہوں"},
+  {text:"I am talkative", urdu:"میں باتونی ہوں"},
+  {text:"I am talkative and friendly.", urdu:"میں باتونی اور دوستانہ ہوں۔"},
+
+  {text:"In the future,", urdu:"مستقبل میں،"},
+  {text:"In the future, I want", urdu:"مستقبل میں، میں چاہتا ہوں"},
+  {text:"In the future, I want to become", urdu:"مستقبل میں، میں بننا چاہتا ہوں"},
+  {text:"In the future, I want to become an entrepreneur.", urdu:"مستقبل میں، میں ایک کاروباری شخص بننا چاہتا ہوں۔"},
+
+  // ═══ 2. Ali — Brother ═══
+  {text:"── Ali: Brother ──", urdu:"علی: بھائی"},
+
+  {text:"This is", urdu:"یہ ہے"},
+  {text:"This is my brother.", urdu:"یہ میرا بھائی ہے۔"},
+
+  {text:"His name", urdu:"اس کا نام"},
+  {text:"His name is Ali.", urdu:"اس کا نام علی ہے۔"},
+
+  {text:"He is", urdu:"وہ ہے"},
+  {text:"He is 10 years old.", urdu:"وہ 10 سال کا ہے۔"},
+
+  {text:"He is", urdu:"وہ ہے"},
+  {text:"He is a student.", urdu:"وہ ایک طالب علم ہے۔"},
+
+  {text:"He likes", urdu:"اسے پسند ہے"},
+  {text:"He likes football.", urdu:"اسے فٹبال پسند ہے۔"},
+
+  {text:"He is", urdu:"وہ ہے"},
+  {text:"He is active", urdu:"وہ متحرک ہے"},
+  {text:"He is active and funny.", urdu:"وہ متحرک اور مزاحیہ ہے۔"},
+
+  // ═══ 3. Ayesha — Sister ═══
+  {text:"── Ayesha: Sister ──", urdu:"عائشہ: بہن"},
+
+  {text:"This is", urdu:"یہ ہے"},
+  {text:"This is my sister.", urdu:"یہ میری بہن ہے۔"},
+
+  {text:"Her name", urdu:"اس کا نام"},
+  {text:"Her name is Ayesha.", urdu:"اس کا نام عائشہ ہے۔"},
+
+  {text:"She is", urdu:"وہ ہے"},
+  {text:"She is 8 years old.", urdu:"وہ 8 سال کی ہے۔"},
+
+  {text:"She is", urdu:"وہ ہے"},
+  {text:"She is a student.", urdu:"وہ ایک طالب علمہ ہے۔"},
+
+  {text:"She likes", urdu:"اسے پسند ہے"},
+  {text:"She likes drawing.", urdu:"اسے ڈرائنگ پسند ہے۔"},
+
+  {text:"She is", urdu:"وہ ہے"},
+  {text:"She is kind", urdu:"وہ مہربان ہے"},
+  {text:"She is kind and smart.", urdu:"وہ مہربان اور ذہین ہے۔"},
+
+  // ═══ 4. Parents ═══
+  {text:"── Parents ──", urdu:"والدین"},
+
+  {text:"These are", urdu:"یہ ہیں"},
+  {text:"These are my parents.", urdu:"یہ میرے والدین ہیں۔"},
+
+  {text:"They are", urdu:"وہ ہیں"},
+  {text:"They are very loving.", urdu:"وہ بہت محبت کرنے والے ہیں۔"},
+
+  {text:"They are", urdu:"وہ ہیں"},
+  {text:"They are kind", urdu:"وہ مہربان ہیں"},
+  {text:"They are kind and hardworking.", urdu:"وہ مہربان اور محنتی ہیں۔"},
+
+  {text:"They care", urdu:"وہ خیال رکھتے ہیں"},
+  {text:"They care for our family.", urdu:"وہ ہمارے خاندان کا خیال رکھتے ہیں۔"},
+
+  {text:"They help us", urdu:"وہ ہماری مدد کرتے ہیں"},
+  {text:"They help us every day.", urdu:"وہ ہماری ہر روز مدد کرتے ہیں۔"},
+
+  // ═══ 5. Grandfather ═══
+  {text:"── Grandfather ──", urdu:"دادا"},
+
+  {text:"This is", urdu:"یہ ہیں"},
+  {text:"This is my grandfather.", urdu:"یہ میرے دادا ہیں۔"},
+
+  {text:"He is", urdu:"وہ ہیں"},
+  {text:"He is old", urdu:"وہ بزرگ ہیں"},
+  {text:"He is old and wise.", urdu:"وہ بزرگ اور دانا ہیں۔"},
+
+  {text:"He is", urdu:"وہ ہیں"},
+  {text:"He is very kind.", urdu:"وہ بہت مہربان ہیں۔"},
+
+  {text:"He tells us", urdu:"وہ ہمیں سناتے ہیں"},
+  {text:"He tells us stories.", urdu:"وہ ہمیں کہانیاں سناتے ہیں۔"},
+
+  // ═══ 6. Dog (Max) ═══
+  {text:"── Dog: Max ──", urdu:"کتا: میکس"},
+
+  {text:"This is", urdu:"یہ ہے"},
+  {text:"This is my dog.", urdu:"یہ میرا کتا ہے۔"},
+
+  {text:"Its name", urdu:"اس کا نام"},
+  {text:"Its name is Max.", urdu:"اس کا نام میکس ہے۔"},
+
+  {text:"It is", urdu:"یہ ہے"},
+  {text:"It is cute", urdu:"یہ پیارا ہے"},
+  {text:"It is cute and loyal.", urdu:"یہ پیارا اور وفادار ہے۔"},
+
+  {text:"It likes", urdu:"اسے پسند ہے"},
+  {text:"It likes to play.", urdu:"اسے کھیلنا پسند ہے۔"},
+
+  // ═══ 7. House ═══
+  {text:"── House ──", urdu:"گھر"},
+
+  {text:"This is", urdu:"یہ ہے"},
+  {text:"This is my house.", urdu:"یہ میرا گھر ہے۔"},
+
+  {text:"It is", urdu:"یہ ہے"},
+  {text:"It is beautiful.", urdu:"یہ خوبصورت ہے۔"},
+
+  {text:"It is", urdu:"یہ ہے"},
+  {text:"It is big", urdu:"یہ بڑا ہے"},
+  {text:"It is big and clean.", urdu:"یہ بڑا اور صاف ہے۔"},
+
+  {text:"I love", urdu:"مجھے پیار ہے"},
+  {text:"I love my house.", urdu:"مجھے اپنے گھر سے پیار ہے۔"},
+
+];
+
+const P_ROW_H=64;
+let pCur=0, pBuilt=false;
+
+function pBuild() {
+  if(pBuilt) return; pBuilt=true;
+  const track=document.getElementById('tp-track');
+  const inner=document.getElementById('tp-inner');
+  inner.innerHTML='';
+  const spacer=document.createElement('div');
+  spacer.style.height=(track.clientHeight/2-P_ROW_H/2)+'px';
+  inner.appendChild(spacer.cloneNode());
+  chunks.forEach((c,i)=>{
+    const row=document.createElement('div');
+    row.className='tp-row'+(i===0?' active':'');
+    row.innerHTML=`<span class="tp-text">${c.text}</span>`;
+    row.onclick=()=>pGo(i);
+    inner.appendChild(row);
+  });
+  inner.appendChild(spacer.cloneNode());
+}
+
+let pPlaying = false;
+
+function pGo(idx, sp=true) {
+  pCur=Math.max(0,Math.min(chunks.length-1,idx));
+  document.querySelectorAll('.tp-row').forEach((r,i)=>r.classList.toggle('active',i===pCur));
+  document.getElementById('p-prev').disabled=pCur===0;
+  document.getElementById('tp-urdu').textContent=chunks[pCur].urdu;
+  // update progress bar
+  (function(){
+    var fill = document.getElementById('p-prog-fill');
+    var text = document.getElementById('p-prog-text');
+    if(fill) fill.style.width = ((pCur+1)/chunks.length*100)+'%';
+    if(text) text.textContent = (pCur+1)+' / '+chunks.length;
+  })();
+  document.getElementById('tp-track').scrollTo({top:pCur*P_ROW_H,behavior:'smooth'});
+  if(sp && pPlaying) {
+    synth.cancel();
+    const u = new SpeechSynthesisUtterance(chunks[pCur].text);
+    u.lang='en-US'; u.rate=0.85;
+    const voices=synth.getVoices();
+    u.voice=voices.find(v=>v.lang.includes('en')&&v.name.includes('Google'))||voices[0];
+    // after TTS ends, wait 3s for student to repeat, then auto-advance
+    u.onend = () => {
+      if (!pPlaying) return;
+      setTimeout(() => {
+        if (!pPlaying) return;
+        if (pCur < chunks.length - 1) {
+          pGo(pCur + 1, true);
+        } else {
+          // reached last chunk — stop playing
+          pPlaying = false;
+          pSetPlayIcon(false);
+        }
+      }, 1500);
+    };
+    synth.speak(u);
+  } else if (sp && !pPlaying) {
+    speak(chunks[pCur].text,'en-US',0.85);
+  }
+}
+
+function pSetPlayIcon(playing) {
+  const btn = document.getElementById('p-play-btn');
+  if (!btn) return;
+  document.getElementById('p-play-icon').style.display  = playing ? 'none'  : 'block';
+  document.getElementById('p-pause-icon').style.display = playing ? 'block' : 'none';
+  if (playing) btn.classList.add('playing'); else btn.classList.remove('playing');
+}
+
+function pPlayToggle() {
+  if (!pPlaying) {
+    pPlaying = true;
+    pSetPlayIcon(true);
+    pGo(pCur, true);
+  } else {
+    pPlaying = false;
+    synth.cancel();
+    pSetPlayIcon(false);
+  }
+}
+
+function pStart() {
+  document.getElementById('p-overlay').style.display='none';
+  document.getElementById('p-play-btn').style.visibility = 'visible';
+  document.getElementById('p-prev').style.visibility = 'visible';
+  document.getElementById('p-next').style.visibility = 'visible';
+  document.getElementById('p-progress-wrap').style.display = 'block';
+  pBuild();
+  pGo(0, false);
+}
+
+/* ─── CONVERSATION ─────────────────────────────────── */
+const convo=[
+  // Basic Introduction
+  {qe:"What is your name?", qu:"آپ کا نام کیا ہے؟", re:"My name is Ahmad.", ru:"میرا نام احمد ہے۔"},
+  {qe:"Where are you from?", qu:"آپ کہاں سے ہیں؟", re:"I am from Pakistan.", ru:"میں پاکستان سے ہوں۔"},
+  {qe:"Where do you live?", qu:"آپ کہاں رہتے ہیں؟", re:"I live in Islamabad.", ru:"میں اسلام آباد میں رہتا ہوں۔"},
+  {qe:"How old are you?", qu:"آپ کی عمر کیا ہے؟", re:"I am 13 years old.", ru:"میں 13 سال کا ہوں۔"},
+  {qe:"Are you a student?", qu:"کیا آپ طالب علم ہیں؟", re:"Yes, I am a student.", ru:"جی ہاں، میں طالب علم ہوں۔"},
+  {qe:"What do you like to do?", qu:"آپ کیا کرنا پسند کرتے ہیں؟", re:"I like reading books and playing cricket.", ru:"مجھے کتابیں پڑھنا اور کرکٹ کھیلنا پسند ہے۔"},
+  // Family Introduction
+  {qe:"Do you have a brother?", qu:"کیا آپ کا بھائی ہے؟", re:"Yes, I have a brother.", ru:"جی ہاں، میرا بھائی ہے۔"},
+  {qe:"What is your brother's name?", qu:"آپ کے بھائی کا نام کیا ہے؟", re:"His name is Ali.", ru:"اس کا نام علی ہے۔"},
+  {qe:"How old is your brother?", qu:"آپ کا بھائی کتنے سال کا ہے؟", re:"He is 10 years old.", ru:"وہ 10 سال کا ہے۔"},
+  {qe:"What does your brother like?", qu:"آپ کا بھائی کیا پسند کرتا ہے؟", re:"He likes football.", ru:"وہ فٹبال پسند کرتا ہے۔"},
+  {qe:"Do you have a sister?", qu:"کیا آپ کی بہن ہے؟", re:"Yes, I have a sister.", ru:"جی ہاں، میری بہن ہے۔"},
+  {qe:"What is your sister's name?", qu:"آپ کی بہن کا نام کیا ہے؟", re:"Her name is Ayesha.", ru:"اس کا نام عائشہ ہے۔"},
+  {qe:"What does she like?", qu:"وہ کیا پسند کرتی ہے؟", re:"She likes drawing.", ru:"وہ ڈرائنگ پسند کرتی ہے۔"},
+  {qe:"Tell me about your parents.", qu:"اپنے والدین کے بارے میں بتائیں۔", re:"They are kind and hardworking.", ru:"وہ مہربان اور محنتی ہیں۔"},
+  {qe:"What do your parents do?", qu:"آپ کے والدین کیا کرتے ہیں؟", re:"They take care of our family.", ru:"وہ ہمارے خاندان کا خیال رکھتے ہیں۔"},
+  {qe:"Do you love your family?", qu:"کیا آپ اپنے خاندان سے محبت کرتے ہیں؟", re:"Yes, I love my family.", ru:"جی ہاں، میں اپنے خاندان سے محبت کرتا ہوں۔"},
+  // Grandfather & Pet
+  {qe:"Do you have a grandfather?", qu:"کیا آپ کے دادا/نانا ہیں؟", re:"Yes, I have a grandfather.", ru:"جی ہاں، میرے دادا/نانا ہیں۔"},
+  {qe:"How is your grandfather?", qu:"آپ کے دادا/نانا کیسے ہیں؟", re:"He is old and wise.", ru:"وہ بوڑھے اور دانا ہیں۔"},
+  {qe:"What does your grandfather do?", qu:"آپ کے دادا/نانا کیا کرتے ہیں؟", re:"He tells us stories.", ru:"وہ ہمیں کہانیاں سناتے ہیں۔"},
+  {qe:"Do you have a pet?", qu:"کیا آپ کے پاس پالتو جانور ہے؟", re:"Yes, I have a dog.", ru:"جی ہاں، میرے پاس کتا ہے۔"},
+  {qe:"What is your dog's name?", qu:"آپ کے کتے کا نام کیا ہے؟", re:"Its name is Max.", ru:"اس کا نام میکس ہے۔"},
+  {qe:"What does your dog like?", qu:"آپ کا کتا کیا پسند کرتا ہے؟", re:"It likes to play.", ru:"وہ کھیلنا پسند کرتا ہے۔"},
+  // Daily Life
+  {qe:"Where do you study?", qu:"آپ کہاں پڑھتے ہیں؟", re:"I study in school.", ru:"میں اسکول میں پڑھتا ہوں۔"},
+  {qe:"What do you do in school?", qu:"آپ اسکول میں کیا کرتے ہیں؟", re:"I learn and play with friends.", ru:"میں سیکھتا ہوں اور دوستوں کے ساتھ کھیلتا ہوں۔"},
+  {qe:"Do you like reading?", qu:"کیا آپ کو پڑھنا پسند ہے؟", re:"Yes, I like reading books.", ru:"جی ہاں، مجھے کتابیں پڑھنا پسند ہے۔"},
+  {qe:"Do you help your family?", qu:"کیا آپ اپنے خاندان کی مدد کرتے ہیں؟", re:"Yes, I help my family.", ru:"جی ہاں، میں مدد کرتا ہوں۔"},
+  {qe:"Are you a friendly person?", qu:"کیا آپ دوستانہ انسان ہیں؟", re:"Yes, I am friendly.", ru:"جی ہاں، میں دوستانہ ہوں۔"},
+  {qe:"What is your dream?", qu:"آپ کا خواب کیا ہے؟", re:"I want to become an entrepreneur.", ru:"میں کاروباری شخص بننا چاہتا ہوں۔"},
+  {qe:"Do you like cricket?", qu:"کیا آپ کو کرکٹ پسند ہے؟", re:"Yes, I like cricket.", ru:"جی ہاں، مجھے کرکٹ پسند ہے۔"},
+  {qe:"Are you happy with your life?", qu:"کیا آپ اپنی زندگی سے خوش ہیں؟", re:"Yes, I am happy with my life.", ru:"جی ہاں، میں خوش ہوں۔"},
+];
+
+let cIdx=0, cStarted=false;
+const cTyping=`<div class="typing-dots"><span></span><span></span><span></span></div>`;
+
+function cStart(){
+  document.getElementById('c-overlay').style.display='none';
+  // Show wavy animation immediately
+  document.getElementById('c-wave-container').style.display='block';
+  cStarted=true;
+  document.getElementById('c-nextBtn').disabled=false;
+  document.getElementById('c-prevBtn').style.visibility='visible';
+  document.getElementById('c-nextBtn').style.visibility='visible';
+  cRender();
+}
+function cStep(d){cIdx+=d;cRender();}
+function cRender(){
+  const item=convo[cIdx];
+  const qEn=document.getElementById('c-q-en'), qUr=document.getElementById('c-q-ur');
+  const rEn=document.getElementById('c-r-en'), rUr=document.getElementById('c-r-ur');
+  const rBub=document.getElementById('c-r-bubble');
+  const qRow=document.getElementById('c-q-row');
+  [qEn,qUr,rEn,rUr].forEach(el=>el.classList.remove('fade-in'));
+  rBub.style.display='none';
+  qRow.style.display='none';
+  document.getElementById('c-wave-container').style.display='block';
+  qEn.innerHTML=cTyping; qUr.innerHTML=''; rEn.innerHTML=''; rUr.innerHTML='';
+  document.getElementById('c-prog').style.width=`${((cIdx+1)/convo.length)*100}%`;
+  document.getElementById('c-prevBtn').disabled=cIdx===0;
+  document.getElementById('c-nextBtn').disabled=cIdx===convo.length-1;
+  cSpeak(item);
+}
+function cSpeak(item){
+  synth.cancel();
+  const qu=new SpeechSynthesisUtterance(item.qe), ru=new SpeechSynthesisUtterance(item.re);
+  const voices=synth.getVoices();
+  qu.voice=voices.find(v=>v.lang.startsWith('en')&&(v.name.includes('Female')||v.name.includes('Zira')||v.name.includes('Google UK English Female')||v.name.includes('Samantha')))||voices.find(v=>v.lang.startsWith('en'))||voices[0];
+  ru.voice=voices.find(v=>v.lang.startsWith('en')&&(v.name.includes('Male')||v.name.includes('David')||v.name.includes('Google UK English Male')||v.name.includes('Daniel')))||voices.find(v=>v.lang.startsWith('en')&&v!==qu.voice)||voices[0];
+  qu.rate=ru.rate=0.85;
+  setTimeout(()=>{
+    // Hide wave, show bubble
+    document.getElementById('c-wave-container').style.display='none';
+    document.getElementById('c-q-row').style.display='flex';
+    document.getElementById('c-q-en').innerHTML=item.qe; document.getElementById('c-q-en').classList.add('fade-in');
+    document.getElementById('c-q-ur').innerHTML=item.qu; document.getElementById('c-q-ur').classList.add('fade-in');
+    synth.speak(qu);
+  },600);
+  qu.onend=()=>{
+    const rb=document.getElementById('c-r-bubble'); rb.style.display='flex';
+    document.getElementById('c-r-en').innerHTML=item.re; document.getElementById('c-r-en').classList.add('fade-in');
+    document.getElementById('c-r-ur').innerHTML=item.ru; document.getElementById('c-r-ur').classList.add('fade-in');
+    synth.speak(ru);
+  };
+}
+
+/* ─── SPEAKING TEST ────────────────────────────────── */
+const tData=[
+  // ── Self-Introduction ──
+  {q:"What is your name?", a:"My name is Ahmad."},
+  {q:"Where are you from?", a:"I am from Pakistan."},
+  {q:"Where do you live?", a:"I live in Islamabad."},
+  {q:"How old are you?", a:"I am 13 years old."},
+  {q:"Are you a student?", a:"Yes, I am a student."},
+  {q:"What do you like to do?", a:"I like reading books and playing cricket."},
+  {q:"Are you a friendly person?", a:"Yes, I am talkative and friendly."},
+  {q:"What is your dream?", a:"I want to become an entrepreneur."},
+  {q:"Are you happy with your life?", a:"Yes, I am happy with my life."},
+  {q:"Do you like cricket?", a:"Yes, I like cricket."},
+  // ── Family ──
+  {q:"Do you have a brother?", a:"Yes, I have a brother."},
+  {q:"What is your brother's name?", a:"His name is Ali."},
+  {q:"How old is your brother?", a:"He is 10 years old."},
+  {q:"What does your brother like?", a:"He likes football."},
+  {q:"How would you describe your brother?", a:"He is active and funny."},
+  {q:"Do you have a sister?", a:"Yes, I have a sister."},
+  {q:"What is your sister's name?", a:"Her name is Ayesha."},
+  {q:"What does your sister like?", a:"She likes drawing."},
+  {q:"How would you describe your sister?", a:"She is kind and smart."},
+  {q:"Tell me about your parents.", a:"They are kind and hardworking."},
+  {q:"What do your parents do?", a:"They take care of our family."},
+  {q:"Do you love your family?", a:"Yes, I love my family."},
+  // ── Grandfather & Pet ──
+  {q:"Do you have a grandfather?", a:"Yes, I have a grandfather."},
+  {q:"How would you describe your grandfather?", a:"He is old and wise."},
+  {q:"What does your grandfather do?", a:"He tells us stories."},
+  {q:"Do you have a pet?", a:"Yes, I have a dog named Max."},
+  {q:"What is your dog like?", a:"It is cute and loyal."},
+  // ── Daily Life & School ──
+  {q:"Where do you study?", a:"I study in school."},
+  {q:"What do you do in school?", a:"I learn and play with friends."},
+  {q:"Do you help your family?", a:"Yes, I help my family every day."},
+];
+let tIdx=0;
+
+function tStart(){document.getElementById('t-start').style.display='none';document.getElementById('t-content').style.display='flex';document.getElementById('t-ctrl-bar').style.display='flex';tRender();}
+function tRender(){
+  const it=tData[tIdx];
+  document.getElementById('t-q-text').textContent=it.q;
+  document.getElementById('t-a-text').textContent=it.a;
+  document.getElementById('t-reveal').style.display='none';
+  document.getElementById('t-show').textContent='Show Answer';
+  const pct=((tIdx+1)/tData.length)*100;
+  document.getElementById('t-prog').style.width=pct+'%';
+  document.getElementById('t-prog-text').textContent=`Questions completed: ${tIdx} / ${tData.length}`;
+  const tNextBtn = document.getElementById('t-next');
+  if (tIdx === tData.length - 1) {
+    tNextBtn.textContent = 'Try Again ↺';
+    tNextBtn.onclick = () => { tIdx=0; document.getElementById('t-congrats').style.display='none'; document.getElementById('t-content').style.display='flex'; document.getElementById('t-ctrl-bar').style.display='flex'; document.getElementById('t-instruction').style.visibility='visible'; tRender(); };
+  } else {
+    tNextBtn.textContent = 'Next ▶';
+    tNextBtn.onclick = tHandleNext;
+  }
+  document.getElementById('t-prev').disabled=tIdx===0;
+  tPlayTTS('t-q-text');
+}
+function tShowAnswer(){
+  const r=document.getElementById('t-reveal'), b=document.getElementById('t-show');
+  if(r.style.display==='none'||!r.style.display){r.style.display='flex';b.textContent='Hide Answer';tPlayTTS('t-a-text');}
+  else{r.style.display='none';b.textContent='Show Answer';}
+}
+function tHandleNext(){if(tIdx===tData.length-1)tFinish();else tMove(1);}
+function tMove(s){tIdx+=s;tRender();}
+function tFinish(){
+  document.getElementById('t-content').style.display='none';
+  document.getElementById('t-congrats').style.display='flex';
+  document.getElementById('t-ctrl-bar').style.display='none';
+  document.getElementById('t-instruction').style.visibility='hidden';
+  document.getElementById('t-prog').style.width='100%';
+  document.getElementById('t-prog-text').textContent=`Questions completed: ${tData.length} / ${tData.length}`;
+  confetti({particleCount:150,spread:70,origin:{y:.6},colors:['#c8a84b','#28a870','#f7faf8']});
+}
+function tPlayTTS(id){
+  const t=document.getElementById(id).innerText; synth.cancel();
+  const u=new SpeechSynthesisUtterance(t);
+  const v=synth.getVoices(), fv=v.find(x=>x.name.includes('Female')||x.name.includes('Google US English')||x.name.includes('Samantha'));
+  if(fv)u.voice=fv; u.rate=0.85; synth.speak(u);
+}
+
+/* ─── ASSESSMENT ───────────────────────────────────── */
+const aVocab=[
+  {q:'"They" means:', opts:["وہ (واحد)","وہ (جمع)","ہم"], c:1},
+  {q:'"Our" means:', opts:["ان کا","ہمارا","تمہارا"], c:1},
+  {q:'"He" refers to:', opts:["مونث","مذکر شخص","جانور"], c:1},
+  {q:'"We" means:', opts:["میں","ہم","وہ"], c:1},
+  {q:'"Wise" means:', opts:["سست","دانا","غصہ"], c:1},
+  {q:'"Hardworking" means:', opts:["محنتی","خوش","بیمار"], c:0},
+  {q:'"Entrepreneur" means:', opts:["طالب علم","کاروباری شخص","ڈاکٹر"], c:1},
+  {q:'"Introduce" means:', opts:["کھانا","تعارف کروانا","کھیلنا"], c:1},
+  {q:'"Care" means:', opts:["خیال رکھنا","بھول جانا","دوڑنا"], c:0},
+  {q:'"Future" means:', opts:["ماضی","مستقبل","آج"], c:1},
+  {q:'"Honest" means:', opts:["ایماندار","جھوٹا","غصہ"], c:0},
+  {q:'"Active" means:', opts:["متحرک","سست","بیمار"], c:0},
+  {q:'"Is" is used for:', opts:["واحد","جمع","سوال"], c:0},
+  {q:'"Are" is used for:', opts:["واحد","جمع","ماضی"], c:1},
+  {q:'"My" means:', opts:["میرا / میری","اس کا","ان کا"], c:0},
+  {q:'"Her" means:', opts:["اس کا (مونث)","ہمارا","تمہارا"], c:0},
+  {q:'"Their" means:', opts:["ان کا","میرا","تمہارا"], c:0},
+  {q:'"Polite" means:', opts:["بدتمیز","شائستہ","غصہ"], c:1},
+  {q:'"Loyal" means:', opts:["وفادار","سست","جھوٹا"], c:0},
+  {q:'"Different" means:', opts:["ایک جیسا","مختلف","آسان"], c:1},
+];
+const aTrans=[
+  {q:"میں ایک طالب علم ہوں", opts:["I am a teacher","I am a student","I am a doctor"], c:1},
+  {q:"وہ بہت ذہین ہے", opts:["He is very smart","He is very slow","He is very tall"], c:0},
+  {q:"ہم دوست ہیں", opts:["We are friends","They are friends","You are friends"], c:0},
+  {q:"وہ کرکٹ کھیلتا ہے", opts:["He plays cricket","He reads books","He plays football"], c:0},
+  {q:"وہ مہربان ہے", opts:["She is kind","She is angry","She is busy"], c:0},
+  {q:"یہ میرا گھر ہے", opts:["It is my house","It is my school","It is my book"], c:0},
+  {q:"وہ استاد ہیں", opts:["They are teachers","He is teacher","We are teacher"], c:0},
+  {q:"میں خوش ہوں", opts:["I am happy","I am sad","I am tired"], c:0},
+  {q:"وہ ہمارے والدین ہیں", opts:["They are our parents","They are my friends","They are students"], c:0},
+  {q:"وہ مستقبل میں ڈاکٹر بننا چاہتا ہے", opts:["He wants to become a doctor in future","He is doctor now","He likes doctor"], c:0},
+];
+const aConv=[
+  // Section 3: My Introduction
+  {para:"My Introduction", bank:["I","student","ten","from","live","like","Reading","cricket","friendly","am"],
+   blanks:["__________","__________","__________","__________","__________","__________","__________","__________","__________","__________"],
+   answers:["I","am","student","ten","from","live","like","Reading","cricket","friendly"],
+   template:"My name is Irfan. (1)__________ am a (2)__________. I (3)__________ (4)__________ years old. I am (5)__________ Pakistan. I (6)__________ in a city. I (7)__________ to read books. (8)__________ is my favorite hobby. I also play (9)__________. I am a (10)__________ person."},
+  // Section 4: My Brother
+  {para:"My Brother", bank:["brother","is","student","years","plays","football","active","funny","friendly","person"],
+   answers:["brother","is","student","years","plays","football","active","funny","friendly","person"],
+   template:"This is Ali. He is my (1)__________. He (2)__________ my family member. He is a (3)__________ at school. He is ten (4)__________ old. He (5)__________ sports every day. His favorite game is (6)__________. He is very (7)__________ and moves fast. He is a (8)__________ boy who makes me laugh. He is (9)__________ to everyone. He is a good (10)__________."},
+  // Section 5: My Sister
+  {para:"My Sister", bank:["sister","is","student","years","likes","drawing","smart","kind","friendly","person"],
+   answers:["sister","is","student","years","likes","drawing","smart","kind","friendly","person"],
+   template:"This is Sana. She is my (1)__________. She (2)__________ a girl. She is a (3)__________ in class one. She is eight (4)__________ old. She (5)__________ art. She is (6)__________ beautiful flowers today. She is very (7)__________ and gets good marks. She is (8)__________ and helps me. She is (9)__________ to her friends. She is a nice (10)__________."},
+  // Section 6: My Family
+  {para:"My Family", bank:["my","parents","are","hardworking","kind","care","home","happy","love","family"],
+   answers:["my","parents","are","hardworking","kind","care","home","happy","love","family"],
+   template:"I love (1)__________ family. I live with my (2)__________. They (3)__________ very good to me. They are (4)__________ at their jobs. They are (5)__________ and helpful. They take (6)__________ of me every day. We stay in a small (7)__________. We are a (8)__________ family. We (9)__________ each other very much. This is my sweet (10)__________."},
+];
+
+let aScore=0;
+// Fill-in-the-blank state: selectedWord per paragraph
+const aFillState = {}; // keyed by para index: {selectedBank: wordIdx|null, blanks: [filledWord|null,...]}
+
+function aBuild(){
+  document.getElementById('a-vocab-sec').innerHTML='';
+  document.getElementById('a-trans-sec').innerHTML='';
+  document.getElementById('a-conv-sec').innerHTML='';
+
+  // Section 1: MCQ Vocabulary
+  aVocab.forEach((d,i)=>{
+    document.getElementById('a-vocab-sec').innerHTML+=`
+    <div class="a-q-box" id="av-${i}">
+      <div class="a-q-row">
+        <span class="a-q-text">${i+1}. ${d.q}</span>
+      </div>
+      <div class="a-opt-row">${d.opts.map((o,idx)=>`<button class="a-opt-btn a-urdu" onclick="aChk(this,${idx},${d.c},'av-${i}')">${o}</button>`).join('')}</div>
+    </div>`;
+  });
+
+  // Section 2: MCQ Translation
+  aTrans.forEach((d,i)=>{
+    document.getElementById('a-trans-sec').innerHTML+=`
+    <div class="a-q-box" id="at-${i}">
+      <span class="a-q-text a-urdu" style="display:block;margin-bottom:8px;font-size:1rem;">${i+1}. ${d.q}</span>
+      <div class="a-opt-row">${d.opts.map((o,idx)=>`<button class="a-opt-btn" onclick="aChk(this,${idx},${d.c},'at-${i}')">${o}</button>`).join('')}</div>
+    </div>`;
+  });
+
+  // Section 3: Fill in the Blanks
+  aConv.forEach((d,i)=>{
+    aFillState[i] = {selectedBank: null, blanks: new Array(d.answers.length).fill(null)};
+    // Build paragraph HTML with clickable blanks
+    let paraHTML = d.template.replace(/\((\d+)\)__________/g, (match, num)=>{
+      const bIdx = parseInt(num)-1;
+      return `(${num})<span class="a-blank" id="afb-${i}-${bIdx}" onclick="aFillBlank(${i},${bIdx})">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>`;
+    });
+    const bankHTML = d.bank.map((w,wi)=>`<button class="a-bank-word" id="afbw-${i}-${wi}" onclick="aSelectWord(${i},${wi},'${w}')">${w}</button>`).join('');
+    document.getElementById('a-conv-sec').innerHTML+=`
+    <div class="a-fill-box" id="afp-${i}">
+      <div class="a-fill-title">📝 ${d.para}</div>
+      <div style="margin-bottom:6px;font-size:0.75rem;font-weight:700;color:var(--text-muted);letter-spacing:.5px;">WORD BANK</div>
+      <div class="a-word-bank">${bankHTML}</div>
+      <div class="a-para-text">${paraHTML}</div>
+    </div>`;
+  });
+}
+
+// Select a word from the bank
+window.aSelectWord = function(paraIdx, wordIdx, word) {
+  const state = aFillState[paraIdx];
+  // Deselect previous
+  if (state.selectedBank !== null) {
+    const prev = document.getElementById(`afbw-${paraIdx}-${state.selectedBank}`);
+    if(prev) prev.classList.remove('selected');
+  }
+  // If clicking same word again — deselect
+  if (state.selectedBank === wordIdx) { state.selectedBank = null; return; }
+  state.selectedBank = wordIdx;
+  const btn = document.getElementById(`afbw-${paraIdx}-${wordIdx}`);
+  if(btn) btn.classList.add('selected');
+};
+
+// Click a blank to fill it
+window.aFillBlank = function(paraIdx, blankIdx) {
+  const state = aFillState[paraIdx];
+  const blankEl = document.getElementById(`afb-${paraIdx}-${blankIdx}`);
+  // If blank already filled — clear it
+  if (state.blanks[blankIdx] !== null) {
+    // Re-enable the bank word that was used here
+    const usedWord = state.blanks[blankIdx];
+    const d = aConv[paraIdx];
+    const wi = d.bank.indexOf(usedWord);
+    if(wi>=0){ const bw=document.getElementById(`afbw-${paraIdx}-${wi}`); if(bw){bw.classList.remove('used');bw.classList.remove('selected');}}
+    state.blanks[blankIdx] = null;
+    blankEl.textContent = '      ';
+    blankEl.classList.remove('filled');
+    if(state.selectedBank!==null){const sw=document.getElementById(`afbw-${paraIdx}-${state.selectedBank}`);if(sw)sw.classList.remove('selected');state.selectedBank=null;}
+    return;
+  }
+  // No word selected — nothing to do
+  if (state.selectedBank === null) return;
+  const d = aConv[paraIdx];
+  const word = d.bank[state.selectedBank];
+  // Fill the blank
+  state.blanks[blankIdx] = word;
+  blankEl.textContent = word;
+  blankEl.classList.add('filled');
+  // Mark bank word as used
+  const bw = document.getElementById(`afbw-${paraIdx}-${state.selectedBank}`);
+  if(bw){ bw.classList.remove('selected'); bw.classList.add('used'); }
+  state.selectedBank = null;
+};
+
+function aChk(btn,sel,cor,qid){
+  const p=document.getElementById(qid);
+  if(p.classList.contains('done'))return;
+  p.classList.add('done');
+  if(sel===cor){aScore++;btn.classList.add('correct');}
+  else{btn.classList.add('wrong');p.querySelectorAll('.a-opt-btn')[cor].classList.add('correct');}
+}
+
+function aSubmit(){
+  // Score fill-in-the-blank
+  let fillScore = 0, fillTotal = 0;
+  aConv.forEach((d,i)=>{
+    const state = aFillState[i];
+    d.answers.forEach((ans, bIdx)=>{
+      fillTotal++;
+      const blankEl = document.getElementById(`afb-${i}-${bIdx}`);
+      const given = (state.blanks[bIdx]||'').toLowerCase().trim();
+      if(given === ans.toLowerCase().trim()){
+        fillScore++; aScore++;
+        if(blankEl){blankEl.classList.add('correct-fill');}
+      } else {
+        if(blankEl){blankEl.classList.add('wrong-fill'); blankEl.title='Answer: '+ans;}
+      }
+      // Disable further interaction
+      if(blankEl) blankEl.onclick=null;
+    });
+    // Disable bank words
+    d.bank.forEach((_,wi)=>{ const bw=document.getElementById(`afbw-${i}-${wi}`); if(bw)bw.onclick=null; });
+  });
+
+  document.getElementById('a-quiz').style.display='none';
+  document.getElementById('a-result').style.display='block';
+  document.getElementById('a-bottom-nav').style.display='flex';
+  const total = aVocab.length + aTrans.length + fillTotal;
+  document.getElementById('a-score').textContent=`${aScore}/${total}`;
+  let r='';
+  if(aScore===total)r="Perfect! You are a Master! 🌟";
+  else if(aScore>=total*0.83)r="Excellent Work! Keep it up! 👏";
+  else if(aScore>=total*0.67)r="Good Job! You\'re doing well. 👍";
+  else if(aScore>=total*0.5)r="Keep Practicing! You\'re getting there. 💪";
+  else r="Don\'t give up! Review the lessons and try again. 📚";
+  document.getElementById('a-remarks').textContent=r;
+  const end=Date.now()+3000;
+  (function frame(){
+    confetti({particleCount:3,angle:60,spread:55,origin:{x:0},colors:['#1a4731','#40916c','#b7e4c7']});
+    confetti({particleCount:3,angle:120,spread:55,origin:{x:1},colors:['#1a4731','#40916c','#b7e4c7']});
+    if(Date.now()<end)requestAnimationFrame(frame);
+  }());
+}
+
+function aRetake(){
+  aScore=0;
+  document.getElementById('a-result').style.display='none';
+  document.getElementById('a-bottom-nav').style.display='none';
+  document.getElementById('a-quiz').style.display='block';
+  aBuild(); window.scrollTo(0,0);
+}
+
+/* ─── SIDEBAR ──────────────────────────────────────── */
+function toggleSidebar() {
+  const sb = document.getElementById('sidebar');
+  const ov = document.getElementById('sidebar-overlay');
+  const isOpen = sb.classList.contains('open');
+  if (isOpen) { closeSidebar(); } else { sb.classList.add('open'); ov.classList.add('open'); }
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebar-overlay').classList.remove('open');
+}
+
+/* ─── INIT ─────────────────────────────────────────── */
+window.addEventListener('load',()=>{
+  synth.getVoices();
+  vRender(0);
+  sRender();
+  aBuild();
+  window.speechSynthesis.onvoiceschanged=()=>{synth.getVoices();};
+});
+
+// ─── Challenge Page Functions ─────────────────────────────────────────────
+function challengeCopyNumber() {
+  navigator.clipboard.writeText("0349 8768545").then(() => {
+    alert("WhatsApp number copied to clipboard!");
+  });
+}
+
+/* ─── COURSE PROGRESS ─────────────────────────────── */
+let daysCompleted = 0;
+function updateCourseProgress() {
+  const total = 60;
+  const pct = Math.min((daysCompleted / total) * 100, 100);
+  const fill = document.getElementById('course-prog-fill');
+  const count = document.getElementById('course-prog-count');
+  if (fill) fill.style.width = pct + '%';
+  if (count) count.textContent = daysCompleted + ' / ' + total + ' Days';
+}
+
+function challengeGenerateImage() {
+  const qs = [
+    "Hello! How are you?",
+    "What is your name?",
+    "Where are you from?",
+    "Nice to meet you!",
+    "See you tomorrow!"
+  ];
+
+  // ── Populate header with student info ──
+  const nameEl = document.getElementById('challenge-name-input');
+  const studentName = (nameEl ? nameEl.value.trim() : '') || window.USER_NAME || '—';
+  document.getElementById('ch-header-name').textContent  = studentName;
+  document.getElementById('ch-header-marks').textContent = 'Quiz Marks: ' + aScore;
+  document.getElementById('ch-header-day').textContent   = 'Day ' + daysCompleted + ': Writing Task';
+  const resultsDiv = document.getElementById('challenge-results-content');
+  resultsDiv.innerHTML = '';
+  for (let i = 1; i <= 5; i++) {
+    const ans = document.getElementById('cq' + i).value || "Not answered";
+    const row = document.createElement('div');
+    row.style.cssText = "background:rgba(255,255,255,0.6);border:1px solid rgba(0,0,0,0.05);border-radius:6px;padding:5px 10px;margin:0 10px 6px 10px;";
+    row.innerHTML = `<b style="color:#064e3b;display:block;font-size:0.72rem;margin-bottom:1px;">${qs[i-1]}</b><span style="color:#1a1a1a;display:block;font-size:0.78rem;font-weight:500;">${ans}</span>`;
+    resultsDiv.appendChild(row);
+  }
+  const area = document.getElementById('challenge-capture-area');
+  // Increment course progress
+  if (daysCompleted < 60) { daysCompleted++; updateCourseProgress(); }
+  html2canvas(area, {
+    scale: 3,
+    useCORS: true,
+    logging: false,
+    backgroundColor: '#064e3b'
+  }).then(canvas => {
+    const dataURL = canvas.toDataURL('image/png');
+    // Show preview + download link (works on all devices including iOS)
+    const previewImg = document.getElementById('challenge-preview-img');
+    const dlLink     = document.getElementById('challenge-download-link');
+    const dlArea     = document.getElementById('challenge-download-area');
+    previewImg.src   = dataURL;
+    dlLink.href      = dataURL;
+    dlArea.style.display = 'block';
+    dlArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    // Also attempt programmatic download for desktop browsers
+    try {
+      const a = document.createElement('a');
+      a.download = 'Day1_Writing_Task.png';
+      a.href = dataURL;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } catch(e) { /* desktop download failed silently; user can use the link/image above */ }
+  });
+}
+
+// Active nav button syncing
+const PAGE_TO_NAV = {day1:'day1',vocab:'Vocabulary',sentences:'Sentences',practice:'Practice',convo:'Conversation',test:'Speaking Test',assess:'Quiz',challenge:'Challenge'};
+const _origShowPage = showPage;
+window.showPage = function(id) {
+  _origShowPage(id);
+  document.querySelectorAll('.ud-btn, .sb-btn').forEach(b=>b.classList.remove('active'));
+  if(id === 'day1'){
+    // highlight "Day 1" / lesson title button in sidebar — first sb-btn after Home
+    const allSbBtns = [...document.querySelectorAll('.sb-btn')];
+    // There's no dedicated day1 sb-btn; highlight the sidebar header title row or skip
+    // Instead highlight nothing specific (day1 has no sidebar entry)
+  } else if(PAGE_TO_NAV[id]){
+    [...document.querySelectorAll('.sb-btn')].find(b=>b.textContent.includes(PAGE_TO_NAV[id]))?.classList.add('active');
+  }
+};
+</script>
+<!-- ═══════════════ HAMBURGER SIDEBAR ═══════════════ -->
+<div id="sidebar-overlay" onclick="closeSidebar()"></div>
+<nav id="sidebar">
+  <div id="sidebar-header">
+    <span id="sidebar-title">Day 1: [Topic]</span>
+    <button id="sidebar-close" onclick="closeSidebar()" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <button class="sb-btn" onclick="goHome();closeSidebar()">🏠 Home</button>
+  <button class="sb-btn" onclick="gotoPage('vocab');closeSidebar()">1.1: Vocabulary</button>
+  <button class="sb-btn" onclick="gotoPage('sentences');closeSidebar()">1.2: Sentences</button>
+  <button class="sb-btn" onclick="gotoPage('practice');closeSidebar()">1.3: Practice</button>
+  <button class="sb-btn" onclick="gotoPage('convo');closeSidebar()">1.4: Conversation</button>
+  <button class="sb-btn" onclick="gotoPage('test');closeSidebar()">1.5: Speaking Test</button>
+  <button class="sb-btn" onclick="gotoPage('assess');closeSidebar()">1.6: Quiz</button>
+  <button class="sb-btn" onclick="gotoPage('challenge');closeSidebar()">1.7: Challenge</button>
+</nav>
+
+<!-- ═══════════════ REGISTRATION GATE ═══════════════ -->
+<style>
+#reg-gate {
+  position:fixed;inset:0;z-index:99999;
+  background:#6BBF6B;
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  font-family:'Nunito',sans-serif;
+  overflow-y:auto;
+  padding:20px 0;
+}
+.reg-box {
+  background:rgba(255,255,255,0.75);
+  border:1px solid rgba(255,255,255,0.9);
+  border-radius:28px;
+  padding:44px 40px 40px;
+  max-width:400px;width:90%;
+  text-align:center;
+  box-shadow:0 24px 80px rgba(0,0,0,0.25);
+  position:relative;z-index:1;
+}
+.reg-icon { font-size:2.2rem;margin-bottom:10px; }
+.reg-title {
+  font-family:'Cinzel',serif;color:#0d4a22;
+  font-size:1.25rem;margin-bottom:4px;letter-spacing:.5px;
+}
+.reg-sub { color:rgba(0,0,0,0.5);font-size:0.82rem;margin-bottom:28px; }
+.reg-field {
+  width:100%;padding:13px 18px;
+  border-radius:50px;border:1.5px solid rgba(40,168,112,0.5);
+  background:rgba(255,255,255,0.9);
+  color:#0d1f13;font-size:0.95rem;font-family:'Nunito',sans-serif;
+  outline:none;text-align:center;
+  transition:border-color 0.2s,box-shadow 0.2s;
+  margin-bottom:14px;box-sizing:border-box;
+}
+.reg-field::placeholder{color:rgba(0,0,0,0.35);}
+.reg-field:focus{border-color:rgba(40,168,112,0.75);box-shadow:0 0 0 3px rgba(40,168,112,0.13);}
+
+/* ── Photo Upload Area ── */
+.reg-photo-area {
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  margin-bottom:4px;
+}
+.reg-avatar-ring {
+  width:88px;height:88px;border-radius:50%;
+  border:2.5px dashed rgba(40,168,112,0.5);
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,0.05);
+  overflow:hidden;position:relative;cursor:pointer;
+  transition:border-color 0.2s,background 0.2s;
+}
+.reg-avatar-ring:hover{border-color:rgba(244,208,63,0.7);background:rgba(244,208,63,0.05);}
+.reg-avatar-ring img{width:100%;height:100%;object-fit:cover;display:none;border-radius:50%;}
+.reg-avatar-ring .avatar-placeholder{font-size:2rem;opacity:0.5;pointer-events:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);line-height:1;}
+.reg-photo-btn {
+  font-family:'Nunito',sans-serif;font-size:0.8rem;font-weight:700;
+  color:#0d4a22;
+  background:rgba(40,168,112,0.2);
+  border:1px solid rgba(40,168,112,0.45);
+  border-radius:50px;padding:8px 18px;cursor:pointer;
+  transition:background 0.2s,color 0.2s;
+}
+.reg-photo-btn:hover{background:rgba(40,168,112,0.4);color:#fff;}
+
+/* ── Crop Modal ── */
+#crop-modal {
+  position:fixed;inset:0;z-index:100001;
+  background:rgba(0,0,0,0.88);
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  padding:20px;
+}
+#crop-modal.open{display:flex;}
+.crop-box{
+  background:#0d2b18;border:1px solid rgba(40,168,112,0.4);
+  border-radius:24px;padding:30px 28px;
+  max-width:380px;width:100%;text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,0.7);
+}
+.crop-title{font-family:'Cinzel',serif;color:#f4d03f;font-size:1rem;margin-bottom:18px;letter-spacing:.4px;}
+.crop-stage{
+  position:relative;width:260px;height:260px;margin:0 auto 18px;
+  border-radius:50%;overflow:hidden;
+  border:3px solid rgba(40,168,112,0.6);
+  background:#061710;cursor:grab;user-select:none;
+  touch-action:none;
+}
+.crop-stage:active{cursor:grabbing;}
+#crop-img{
+  position:absolute;transform-origin:center center;
+  max-width:none;pointer-events:none;
+  image-rendering:auto;
+}
+.crop-mask{
+  position:absolute;inset:0;border-radius:50%;
+  box-shadow:0 0 0 9999px rgba(0,0,0,0.6);pointer-events:none;
+}
+.crop-zoom-row{display:flex;align-items:center;gap:10px;margin-bottom:16px;justify-content:center;}
+.crop-zoom-row label{color:rgba(255,255,255,0.6);font-size:0.78rem;font-weight:700;}
+#crop-zoom{width:140px;accent-color:#28a870;}
+.crop-actions{display:flex;gap:10px;justify-content:center;}
+.crop-btn{
+  font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:800;
+  border:none;border-radius:50px;padding:11px 26px;cursor:pointer;transition:transform 0.15s;
+}
+.crop-btn:hover{transform:scale(1.04);}
+.crop-confirm{background:linear-gradient(135deg,#28a870,#22883f);color:#fff;}
+.crop-cancel{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.75);border:1px solid rgba(255,255,255,0.18);}
+
+/* ── Create Account Button ── */
+.reg-submit {
+  width:100%;padding:14px;
+  background:linear-gradient(135deg,#f4d03f,#d4ac0d);
+  color:#061710;border:none;border-radius:50px;
+  font-size:1rem;font-weight:900;cursor:pointer;
+  font-family:'Cinzel',serif;letter-spacing:.5px;
+  transition:transform 0.15s,box-shadow 0.15s;
+  box-shadow:0 6px 20px rgba(244,208,63,0.35);
+  margin-top:2px;
+}
+.reg-submit:hover{transform:scale(1.04);box-shadow:0 10px 30px rgba(244,208,63,0.48);}
+.reg-err{color:#b91c1c;font-size:0.8rem;min-height:18px;margin-bottom:6px;}
+.reg-prev-btn {
+  display:inline-flex;align-items:center;gap:5px;
+  background:transparent;border:1.5px solid rgba(40,168,112,0.45);
+  color:#0d4a22;font-family:'Nunito',sans-serif;font-size:0.8rem;font-weight:700;
+  border-radius:50px;padding:6px 14px;cursor:pointer;
+  transition:background 0.2s;margin-bottom:14px;
+}
+.reg-prev-btn:hover{background:rgba(40,168,112,0.15);}
+
+/* ── Photo Source Picker ── */
+#photo-source-modal {
+  position:fixed;inset:0;z-index:100002;
+  background:rgba(0,0,0,0.75);
+  display:none;align-items:center;justify-content:center;
+  padding:20px;
+}
+#photo-source-modal.open{display:flex;}
+.photo-source-box {
+  background:#0d2b18;border:1px solid rgba(40,168,112,0.4);
+  border-radius:22px;padding:28px 24px;
+  max-width:300px;width:100%;text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,0.7);
+}
+.photo-source-title{font-family:'Cinzel',serif;color:#f4d03f;font-size:1rem;margin-bottom:22px;letter-spacing:.4px;}
+.photo-source-btns{display:flex;gap:14px;justify-content:center;}
+.photo-source-btn{
+  flex:1;padding:16px 8px;border-radius:14px;border:none;cursor:pointer;
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:0.88rem;
+  transition:transform 0.15s;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+}
+.photo-source-btn:hover{transform:scale(1.05);}
+.photo-source-btn span{font-size:2rem;line-height:1;}
+.psb-camera{background:rgba(40,168,112,0.2);border:1.5px solid rgba(40,168,112,0.5) !important;color:#fff;}
+.psb-gallery{background:rgba(244,208,63,0.15);border:1.5px solid rgba(244,208,63,0.4) !important;color:#fff;}
+.photo-source-cancel{margin-top:16px;background:none;border:none;color:rgba(255,255,255,0.4);font-size:0.8rem;cursor:pointer;font-family:'Nunito',sans-serif;display:block;width:100%;}
+.photo-source-cancel:hover{color:rgba(255,255,255,0.75);}
+
+/* ── Avatar Dropdown ── */
+#ud-user-avatar-wrap { cursor:pointer; }
+#ud-avatar-dropdown {
+  position:fixed;
+  top:calc(var(--dash-h) + 8px);
+  right:12px;
+  background:#0a2e1a;
+  border:1px solid rgba(40,168,112,0.35);
+  border-radius:14px;
+  padding:14px 16px;
+  min-width:190px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.55);
+  z-index:2000;
+  display:none;
+  flex-direction:column;
+  gap:10px;
+  animation:dropIn 0.18s ease;
+}
+@keyframes dropIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+#ud-avatar-dropdown.open{display:flex;}
+#ud-dropdown-name{
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:0.95rem;
+  color:#fff;text-align:center;padding-bottom:10px;
+  border-bottom:1px solid rgba(40,168,112,0.25);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+#ud-logout-btn{
+  background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.3);
+  color:#fca5a5;border-radius:8px;padding:9px 12px;
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:0.85rem;
+  cursor:pointer;text-align:center;transition:background 0.15s;width:100%;
+}
+#ud-logout-btn:hover{background:rgba(239,68,68,0.28);}
+</style>
+
+<div id="reg-gate">
+  <div class="reg-box">
+    <button class="reg-prev-btn" onclick="closeRegGate()">◀ Previous</button>
+    <div class="reg-icon">📚</div>
+    <h2 class="reg-title">English Mastery Course</h2>
+    <p class="reg-sub">Create your account to begin</p>
+
+    <input id="reg-name" class="reg-field" type="text" placeholder="Enter Your Name" autocomplete="off"/>
+    <input id="reg-id"   class="reg-field" type="text" placeholder="Enter ID" autocomplete="off"/>
+    <input id="reg-pwd"  class="reg-field" type="password" placeholder="Enter Password" autocomplete="off"/>
+
+    <div class="reg-photo-area">
+      <div class="reg-avatar-ring" id="reg-avatar-ring" onclick="regOpenCamera()">
+        <img id="reg-avatar-preview" alt="Profile"/>
+        <span class="avatar-placeholder" id="reg-avatar-placeholder">📷</span>
+      </div>
+      <button class="reg-photo-btn" onclick="regOpenCamera()">Upload / Take Profile Picture</button>
+    </div>
+
+    <div class="reg-err" id="reg-err"></div>
+    <button class="reg-submit" onclick="regSubmit()">Create Account</button>
+  </div>
+</div>
+
+<!-- ── Crop Modal ── -->
+<div id="crop-modal">
+  <div class="crop-box">
+    <div class="crop-title">🖼️ Position Your Face</div>
+    <div class="crop-stage" id="crop-stage">
+      <img id="crop-img" alt=""/>
+      <div class="crop-mask"></div>
+    </div>
+    <div class="crop-zoom-row">
+      <label>Zoom</label>
+      <input type="range" id="crop-zoom" min="0.5" max="3" step="0.01" value="1" oninput="cropApplyTransform()"/>
+    </div>
+    <div class="crop-actions">
+      <button class="crop-btn crop-cancel" onclick="cropCancel()">Cancel</button>
+      <button class="crop-btn crop-confirm" onclick="cropConfirm()">Use This Photo</button>
+    </div>
+  </div>
+</div>
+<input type="file" id="reg-file-gallery" accept="image/*" style="display:none" onchange="regHandleFile(event)"/>
+<input type="file" id="reg-file-camera"  accept="image/*" capture="user" style="display:none" onchange="regHandleFile(event)"/>
+
+<!-- ── Photo Source Picker ── -->
+<div id="photo-source-modal">
+  <div class="photo-source-box">
+    <div class="photo-source-title">📷 Add Profile Photo</div>
+    <div class="photo-source-btns">
+      <button class="photo-source-btn psb-camera" onclick="pickCamera()">
+        <span>📷</span>Camera
+      </button>
+      <button class="photo-source-btn psb-gallery" onclick="pickGallery()">
+        <span>🖼️</span>Gallery
+      </button>
+    </div>
+    <button class="photo-source-cancel" onclick="closeSourcePicker()">Cancel</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  /* ── state ── */
+  var croppedDataURL = null;
+  var cropScale = 1, cropX = 0, cropY = 0;
+  var cropDragging = false, cropStartX, cropStartY, cropOriginX, cropOriginY;
+  var CROP_SIZE = 260;
+
+  /* ── photo source picker ── */
+  window.regOpenCamera = function(){
+    document.getElementById('photo-source-modal').classList.add('open');
+  };
+
+  window.pickCamera = function(){
+    document.getElementById('photo-source-modal').classList.remove('open');
+    document.getElementById('reg-file-camera').click();
+  };
+
+  window.pickGallery = function(){
+    document.getElementById('photo-source-modal').classList.remove('open');
+    document.getElementById('reg-file-gallery').click();
+  };
+
+  window.closeSourcePicker = function(){
+    document.getElementById('photo-source-modal').classList.remove('open');
+  };
+
+  window.regHandleFile = function(e){
+    var file = e.target.files[0];
+    if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      openCropModal(ev.target.result);
+    };
+    reader.readAsDataURL(file);
+    e.target.value=''; // reset so same file can be re-selected
+  };
+
+  /* ── crop modal ── */
+  function openCropModal(src){
+    var img = document.getElementById('crop-img');
+    img.src = src;
+    img.onload = function(){
+      // fit image initially so it fills the crop circle
+      var ratio = CROP_SIZE / Math.min(img.naturalWidth, img.naturalHeight);
+      cropScale = ratio;
+      cropX = (CROP_SIZE - img.naturalWidth * cropScale) / 2;
+      cropY = (CROP_SIZE - img.naturalHeight * cropScale) / 2;
+      document.getElementById('crop-zoom').value = cropScale;
+      document.getElementById('crop-zoom').min = ratio * 0.5;
+      document.getElementById('crop-zoom').max = ratio * 4;
+      document.getElementById('crop-zoom').step = ratio * 0.01;
+      cropApplyTransform();
+    };
+    document.getElementById('crop-modal').classList.add('open');
+  }
+
+  window.cropApplyTransform = function(){
+    var zoom = parseFloat(document.getElementById('crop-zoom').value);
+    if(zoom !== cropScale){
+      // zoom toward center
+      var cx = CROP_SIZE/2, cy = CROP_SIZE/2;
+      cropX = cx - (cx - cropX) * (zoom / cropScale);
+      cropY = cy - (cy - cropY) * (zoom / cropScale);
+      cropScale = zoom;
+    }
+    var img = document.getElementById('crop-img');
+    img.style.width  = (img.naturalWidth  * cropScale) + 'px';
+    img.style.height = (img.naturalHeight * cropScale) + 'px';
+    img.style.left = cropX + 'px';
+    img.style.top  = cropY + 'px';
+  };
+
+  /* drag to pan */
+  var stage = document.getElementById('crop-stage');
+  stage.addEventListener('mousedown', function(e){
+    cropDragging=true; cropStartX=e.clientX; cropStartY=e.clientY;
+    cropOriginX=cropX; cropOriginY=cropY; e.preventDefault();
+  });
+  document.addEventListener('mousemove', function(e){
+    if(!cropDragging) return;
+    cropX = cropOriginX + (e.clientX - cropStartX);
+    cropY = cropOriginY + (e.clientY - cropStartY);
+    cropApplyTransform();
+  });
+  document.addEventListener('mouseup', function(){ cropDragging=false; });
+
+  stage.addEventListener('touchstart', function(e){
+    cropDragging=true;
+    cropStartX=e.touches[0].clientX; cropStartY=e.touches[0].clientY;
+    cropOriginX=cropX; cropOriginY=cropY; e.preventDefault();
+  },{passive:false});
+  document.addEventListener('touchmove', function(e){
+    if(!cropDragging) return;
+    cropX = cropOriginX + (e.touches[0].clientX - cropStartX);
+    cropY = cropOriginY + (e.touches[0].clientY - cropStartY);
+    cropApplyTransform(); e.preventDefault();
+  },{passive:false});
+  document.addEventListener('touchend', function(){ cropDragging=false; });
+
+  window.cropCancel = function(){
+    document.getElementById('crop-modal').classList.remove('open');
+  };
+
+  window.cropConfirm = function(){
+    // render the visible crop circle to a canvas
+    var img = document.getElementById('crop-img');
+    var canvas = document.createElement('canvas');
+    canvas.width = CROP_SIZE; canvas.height = CROP_SIZE;
+    var ctx = canvas.getContext('2d');
+    ctx.beginPath(); ctx.arc(CROP_SIZE/2,CROP_SIZE/2,CROP_SIZE/2,0,Math.PI*2);
+    ctx.clip();
+    ctx.drawImage(img, cropX, cropY, img.naturalWidth*cropScale, img.naturalHeight*cropScale);
+    croppedDataURL = canvas.toDataURL('image/png');
+
+    // show preview
+    var preview = document.getElementById('reg-avatar-preview');
+    preview.src = croppedDataURL;
+    preview.style.display = 'block';
+    document.getElementById('reg-avatar-placeholder').style.display = 'none';
+
+    document.getElementById('crop-modal').classList.remove('open');
+  };
+
+  /* ── form submit ── */
+  window.regSubmit = function(){
+    var name = document.getElementById('reg-name').value.trim();
+    var id   = document.getElementById('reg-id').value.trim();
+    var pwd  = document.getElementById('reg-pwd').value;
+    var err  = document.getElementById('reg-err');
+
+    if(!name){ err.textContent='Please enter your name.'; return; }
+    if(!id)  { err.textContent='Please enter your ID.'; return; }
+    if(pwd !== 'freedom'){ err.textContent='Incorrect password. Please try again.'; return; }
+
+    err.textContent='';
+
+    // ── embed user data into the page for all sections to use ──
+    window.USER_NAME   = name;
+    window.USER_ID     = id;
+    window.USER_PHOTO  = croppedDataURL || null;
+
+    // Update the universal dashboard avatar/name if elements exist
+    var udName = document.getElementById('ud-user-name');
+    var udAvatar = document.getElementById('ud-user-avatar');
+    var udDropdownName = document.getElementById('ud-dropdown-name');
+    if(udName) udName.textContent = name;
+    if(udDropdownName) udDropdownName.textContent = '👤 ' + name;
+    if(udAvatar && croppedDataURL){
+      udAvatar.src = croppedDataURL;
+      udAvatar.style.display = 'block';
+      var udAvatarPlaceholder = document.getElementById('ud-avatar-placeholder');
+      if(udAvatarPlaceholder) udAvatarPlaceholder.style.display = 'none';
+    }
+
+    // Populate any greeting elements across all pages
+    document.querySelectorAll('.user-name-display').forEach(function(el){ el.textContent = name; });
+    document.querySelectorAll('.user-id-display').forEach(function(el){ el.textContent = id; });
+    document.querySelectorAll('.user-photo-display').forEach(function(el){
+      if(croppedDataURL){ el.src = croppedDataURL; el.style.display='block'; }
+    });
+
+    // Dismiss gate
+    var gate = document.getElementById('reg-gate');
+    gate.style.transition='opacity 0.45s';
+    gate.style.opacity='0';
+    setTimeout(function(){
+      gate.style.display='none';
+      gate.style.opacity='';
+      showCourse(); buildCourse(); showWeek(1);
+    },450);
+  };
+
+  /* ── avatar dropdown ── */
+  window.toggleAvatarDropdown = function(e){
+    e.stopPropagation();
+    var dd = document.getElementById('ud-avatar-dropdown');
+    dd.classList.toggle('open');
+  };
+
+  document.addEventListener('click', function(){
+    var dd = document.getElementById('ud-avatar-dropdown');
+    if(dd) dd.classList.remove('open');
+  });
+
+  window.doLogout = function(){
+    // Reload the page to return to registration
+    location.reload();
+  };
+
+  /* ── landing start (no registration gate) ── */
+  window.landingStart = function(){
+    window.USER_NAME  = '';
+    window.USER_ID    = '';
+    window.USER_PHOTO = null;
+    showCourse(); buildCourse(); showWeek(1);
+  };
+
+  /* ── reg-gate show/hide (kept for reference) ── */
+  window.openRegGate = function(){
+    var gate = document.getElementById('reg-gate');
+    gate.style.display = 'flex';
+    gate.style.opacity = '0';
+    gate.style.transition = 'opacity 0.35s';
+    setTimeout(function(){ gate.style.opacity = '1'; }, 20);
+  };
+
+  window.closeRegGate = function(){
+    var gate = document.getElementById('reg-gate');
+    gate.style.transition = 'opacity 0.3s';
+    gate.style.opacity = '0';
+    setTimeout(function(){ gate.style.display = 'none'; gate.style.opacity = ''; }, 320);
+  };
+
+  /* ── landing copy buttons ── */
+  window.landingCopy = function(text, btn){
+    navigator.clipboard.writeText(text).then(function(){
+      var orig = btn.textContent;
+      btn.textContent = '✓';
+      setTimeout(function(){ btn.textContent = orig; }, 1500);
+    });
+  };
+
+  /* ── course details popup ── */
+  window.openDetailsPopup = function(){
+    var modal = document.getElementById('course-details-modal');
+    var scroller = document.getElementById('cdm-scroll');
+    scroller.scrollTop = 0;
+    cdmUpdateArrow();
+    modal.classList.add('open');
+  };
+  window.closeDetailsPopup = function(){
+    document.getElementById('course-details-modal').classList.remove('open');
+  };
+  document.getElementById('course-details-modal').addEventListener('click', function(e){
+    if (e.target === this) closeDetailsPopup();
+  });
+
+  /* arrow scroll button */
+  function cdmUpdateArrow() {
+    var scroller = document.getElementById('cdm-scroll');
+    var btn = document.getElementById('cdm-arrow-btn');
+    var atBottom = scroller.scrollHeight - scroller.scrollTop - scroller.clientHeight < 10;
+    btn.innerHTML = atBottom ? '&#8593;' : '&#8595;';
+    btn.title = atBottom ? 'Scroll up' : 'Scroll down';
+  }
+  window.cdmScroll = function(){
+    var scroller = document.getElementById('cdm-scroll');
+    var atBottom = scroller.scrollHeight - scroller.scrollTop - scroller.clientHeight < 10;
+    scroller.scrollBy({ top: atBottom ? -scroller.clientHeight * 0.75 : scroller.clientHeight * 0.75, behavior: 'smooth' });
+    setTimeout(cdmUpdateArrow, 350);
+  };
+  document.getElementById('cdm-scroll').addEventListener('scroll', cdmUpdateArrow);
+
+})();
+</script>
+
+</body>
+</html>
