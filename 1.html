@@ -7,7 +7,87 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,700&family=Nunito:wght@400;500;600;700;800;900&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="day-complete.js"></script>
+<script>
+/**
+ * day-complete.js — inlined
+ */
+(function () {
+
+  /* ── helpers ── */
+  function getCompleted() {
+    try { return JSON.parse(localStorage.getItem('emc_completed_days') || '[]'); }
+    catch (e) { return []; }
+  }
+
+  function saveCompleted(arr) {
+    try { localStorage.setItem('emc_completed_days', JSON.stringify(arr)); }
+    catch (e) { /* storage unavailable */ }
+  }
+
+  /* ── public API ── */
+
+  window.getCompletedDays = function () {
+    return getCompleted();
+  };
+
+  window.getDaysCompleted = function () {
+    return getCompleted().length;
+  };
+
+  window.markDayComplete = function (dayNum) {
+    dayNum = parseInt(dayNum, 10);
+    if (!dayNum || isNaN(dayNum)) return;
+    var completed = getCompleted();
+    if (completed.indexOf(dayNum) === -1) {
+      completed.push(dayNum);
+      saveCompleted(completed);
+    }
+  };
+
+  window.submitAndDownload = function (dayNum, captureSelector) {
+    dayNum = parseInt(dayNum, 10);
+
+    /* 1. Mark complete */
+    window.markDayComplete(dayNum);
+
+    /* 2. Visual feedback on the button */
+    var btn = document.getElementById('day-complete-btn');
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = '✓ Day ' + dayNum + ' Completed!';
+      btn.style.background = 'linear-gradient(135deg,#22883f,#28a870)';
+      btn.style.color = '#fff';
+    }
+
+    /* 3. Download screenshot */
+    var target = captureSelector
+      ? document.querySelector(captureSelector)
+      : document.body;
+    if (!target) target = document.body;
+
+    if (typeof html2canvas === 'function') {
+      html2canvas(target, { useCORS: true, scale: 2 }).then(function (canvas) {
+        var link = document.createElement('a');
+        link.download = 'Day' + dayNum + '-Certificate.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      }).catch(function () {
+        alert('Screenshot failed. Day ' + dayNum + ' has been marked as complete!');
+      });
+    } else {
+      alert('Day ' + dayNum + ' marked as complete! (Install html2canvas to enable image download)');
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var real = getCompleted().length;
+    if (typeof window.daysCompleted !== 'undefined' && real > window.daysCompleted) {
+      window.daysCompleted = real;
+    }
+  });
+
+})();
+</script>
 
 <style>
 /* ═══════════════════════════════════════════════════
@@ -1309,6 +1389,18 @@ body { color: #0d1f13; }
 
 
 
+<!-- ═══════════════ PAGE NAV STRIP ═══════════════ -->
+<div class="page-nav-strip" id="page-nav-strip">
+  <div class="pn-side">
+    <button class="pn-btn" id="pn-prev" onclick="pnNavigate(-1)" title="Previous">&#8592;</button>
+    <span class="pn-label">Previous</span>
+  </div>
+  <div class="pn-side">
+    <span class="pn-label">Next</span>
+    <button class="pn-btn" id="pn-next" onclick="pnNavigate(1)" title="Next">&#8594;</button>
+  </div>
+</div>
+
 <!-- ═══════════════ PAGE 2: DAY 1 INTRO ═══════════════ -->
 <div id="page-day1" class="page with-dash">
   <main>
@@ -1646,21 +1738,6 @@ body { color: #0d1f13; }
   </div>
 </div>
 
-<nav id="page-nav-strip" class="page-nav-strip">
-  <div class="pn-side">
-    <button class="pn-btn" id="pn-prev" onclick="pnNavigate(-1)" title="Previous Page">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-    <span class="pn-label">Previous Page</span>
-  </div>
-  <div class="pn-side">
-    <span class="pn-label">Next Page</span>
-    <button class="pn-btn" id="pn-next" onclick="pnNavigate(1)" title="Next Page">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-  </div>
-</nav>
-
 <!-- ═══════════════════════════════════════════════════
      JAVASCRIPT — ALL LOGIC
 ═══════════════════════════════════════════════════ -->
@@ -1691,8 +1768,10 @@ function showPage(id) {
   if (pg) pg.classList.add('active');
 
   const dash = document.getElementById('universal-dash');
-  if (DASH_PAGES.includes(id)) { dash.classList.add('visible'); }
-  else { dash.classList.remove('visible'); }
+  if (dash) {
+    if (DASH_PAGES.includes(id)) { dash.classList.add('visible'); }
+    else { dash.classList.remove('visible'); }
+  }
 
   // Update active dashboard button
   document.querySelectorAll('.ud-btn').forEach(b=>b.classList.remove('active'));
@@ -1762,11 +1841,11 @@ function gotoPage(id) {
 function goHome() { showPage('landing'); }
 function showCourse() { showPage('course'); buildCourse(); showWeek(1); }
 
-showPage('day1');
-
 /* ─── PAGE NAV STRIP ──────────────────────────────── */
 // Ordered list of inner pages that show the nav strip
 const PN_PAGES = ['day1','vocab','sentences','practice','convo','test','assess','challenge'];
+
+showPage('day1');
 
 function pnUpdateStrip(currentId) {
   const strip = document.getElementById('page-nav-strip');
