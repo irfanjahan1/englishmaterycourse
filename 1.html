@@ -1646,6 +1646,21 @@ body { color: #0d1f13; }
   </div>
 </div>
 
+<nav id="page-nav-strip" class="page-nav-strip">
+  <div class="pn-side">
+    <button class="pn-btn" id="pn-prev" onclick="pnNavigate(-1)" title="Previous Page">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <span class="pn-label">Previous Page</span>
+  </div>
+  <div class="pn-side">
+    <span class="pn-label">Next Page</span>
+    <button class="pn-btn" id="pn-next" onclick="pnNavigate(1)" title="Next Page">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+</nav>
+
 <!-- ═══════════════════════════════════════════════════
      JAVASCRIPT — ALL LOGIC
 ═══════════════════════════════════════════════════ -->
